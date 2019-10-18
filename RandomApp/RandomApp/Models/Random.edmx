@@ -1,0 +1,963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RandomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMINISTRATOR">
+          <Key>
+            <PropertyRef Name="AdministratorID" />
+          </Key>
+          <Property Name="AdministratorID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Emailaddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateEmployed" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="RegionID" Type="int" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEPARTMENT">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" Nullable="false" />
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GRADE">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="int" Nullable="false" />
+          <Property Name="LevelID" Type="int" Nullable="false" />
+          <Property Name="GradeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INSTITUITION">
+          <Key>
+            <PropertyRef Name="InstituitionID" />
+          </Key>
+          <Property Name="InstituitionID" Type="int" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="InstituitionName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LEVEL">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="int" Nullable="false" />
+          <Property Name="LevelName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LevelMode" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="int" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="RegionName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STUDENTSUBJECT">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubjectDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GradeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SUBJECTFACT">
+          <Key>
+            <PropertyRef Name="SubjectFactID" />
+          </Key>
+          <Property Name="SubjectFactID" Type="int" Nullable="false" />
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="SubjectFactDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HistoryFact" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GeneralFact" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TEST">
+          <Key>
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="TestID" Type="int" Nullable="false" />
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="DateStarted" Type="datetime" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestStudent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="TestID" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="THEME">
+          <Key>
+            <PropertyRef Name="ThemeID" />
+          </Key>
+          <Property Name="ThemeID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="ThemeMode" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ADMINISTRATOR_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="ADMINISTRATOR" Type="Self.ADMINISTRATOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ADMINISTRATOR">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITY_REGION">
+          <End Role="REGION" Type="Self.REGION" Multiplicity="1" />
+          <End Role="CITY" Type="Self.CITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGION">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="CITY">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPARTMENT_STUDENTSUBJECT">
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTSUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRADE_LEVEL">
+          <End Role="LEVEL" Type="Self.LEVEL" Multiplicity="1" />
+          <End Role="GRADE" Type="Self.GRADE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEVEL">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="GRADE">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INSTITUITION_CITY">
+          <End Role="CITY" Type="Self.CITY" Multiplicity="1" />
+          <End Role="INSTITUITION" Type="Self.INSTITUITION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITY">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="INSTITUITION">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REGION_COUNTRY">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="REGION" Type="Self.REGION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="REGION">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_COUNTRY">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENTSUBJECT_GRADE">
+          <End Role="GRADE" Type="Self.GRADE" Multiplicity="1" />
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADE">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="STUDENTSUBJECT">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECTFACT_STUDENTSUBJECT">
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="1" />
+          <End Role="SUBJECTFACT" Type="Self.SUBJECTFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTSUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="SUBJECTFACT">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEST_STUDENTSUBJECT">
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="1" />
+          <End Role="TEST" Type="Self.TEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTSUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="TEST">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestStudent_STUDENT">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+          <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="TestStudent">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestStudent_TEST">
+          <End Role="TEST" Type="Self.TEST" Multiplicity="1" />
+          <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEST">
+              <PropertyRef Name="TestID" />
+            </Principal>
+            <Dependent Role="TestStudent">
+              <PropertyRef Name="TestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THEME_STUDENT">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+          <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="THEME">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RandomModelStoreContainer">
+          <EntitySet Name="ADMINISTRATOR" EntityType="Self.ADMINISTRATOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITY" EntityType="Self.CITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRADE" EntityType="Self.GRADE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSTITUITION" EntityType="Self.INSTITUITION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LEVEL" EntityType="Self.LEVEL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REGION" EntityType="Self.REGION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STUDENTSUBJECT" EntityType="Self.STUDENTSUBJECT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUBJECTFACT" EntityType="Self.SUBJECTFACT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEST" EntityType="Self.TEST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestStudent" EntityType="Self.TestStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THEME" EntityType="Self.THEME" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ADMINISTRATOR_USER" Association="Self.FK_ADMINISTRATOR_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="ADMINISTRATOR" EntitySet="ADMINISTRATOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITY_REGION" Association="Self.FK_CITY_REGION">
+            <End Role="REGION" EntitySet="REGION" />
+            <End Role="CITY" EntitySet="CITY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPARTMENT_STUDENTSUBJECT" Association="Self.FK_DEPARTMENT_STUDENTSUBJECT">
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECT" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRADE_LEVEL" Association="Self.FK_GRADE_LEVEL">
+            <End Role="LEVEL" EntitySet="LEVEL" />
+            <End Role="GRADE" EntitySet="GRADE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INSTITUITION_CITY" Association="Self.FK_INSTITUITION_CITY">
+            <End Role="CITY" EntitySet="CITY" />
+            <End Role="INSTITUITION" EntitySet="INSTITUITION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REGION_COUNTRY" Association="Self.FK_REGION_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="REGION" EntitySet="REGION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_COUNTRY" Association="Self.FK_STUDENT_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="STUDENT" EntitySet="STUDENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_USER" Association="Self.FK_STUDENT_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="STUDENT" EntitySet="STUDENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENTSUBJECT_GRADE" Association="Self.FK_STUDENTSUBJECT_GRADE">
+            <End Role="GRADE" EntitySet="GRADE" />
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECTFACT_STUDENTSUBJECT" Association="Self.FK_SUBJECTFACT_STUDENTSUBJECT">
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECT" />
+            <End Role="SUBJECTFACT" EntitySet="SUBJECTFACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEST_STUDENTSUBJECT" Association="Self.FK_TEST_STUDENTSUBJECT">
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECT" />
+            <End Role="TEST" EntitySet="TEST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestStudent_STUDENT" Association="Self.FK_TestStudent_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENT" />
+            <End Role="TestStudent" EntitySet="TestStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestStudent_TEST" Association="Self.FK_TestStudent_TEST">
+            <End Role="TEST" EntitySet="TEST" />
+            <End Role="TestStudent" EntitySet="TestStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THEME_STUDENT" Association="Self.FK_THEME_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENT" />
+            <End Role="THEME" EntitySet="THEME" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RandomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMINISTRATOR">
+          <Key>
+            <PropertyRef Name="AdministratorID" />
+          </Key>
+          <Property Name="AdministratorID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Emailaddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateEmployed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_ADMINISTRATOR_USER" FromRole="ADMINISTRATOR" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="RegionID" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="REGION" Relationship="Self.FK_CITY_REGION" FromRole="CITY" ToRole="REGION" />
+          <NavigationProperty Name="INSTITUITIONs" Relationship="Self.FK_INSTITUITION_CITY" FromRole="CITY" ToRole="INSTITUITION" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="REGIONs" Relationship="Self.FK_REGION_COUNTRY" FromRole="COUNTRY" ToRole="REGION" />
+          <NavigationProperty Name="STUDENTs" Relationship="Self.FK_STUDENT_COUNTRY" FromRole="COUNTRY" ToRole="STUDENT" />
+        </EntityType>
+        <EntityType Name="DEPARTMENT">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="STUDENTSUBJECT" Relationship="Self.FK_DEPARTMENT_STUDENTSUBJECT" FromRole="DEPARTMENT" ToRole="STUDENTSUBJECT" />
+        </EntityType>
+        <EntityType Name="GRADE">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="LevelID" Type="Int32" Nullable="false" />
+          <Property Name="GradeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="LEVEL" Relationship="Self.FK_GRADE_LEVEL" FromRole="GRADE" ToRole="LEVEL" />
+          <NavigationProperty Name="STUDENTSUBJECTs" Relationship="Self.FK_STUDENTSUBJECT_GRADE" FromRole="GRADE" ToRole="STUDENTSUBJECT" />
+        </EntityType>
+        <EntityType Name="INSTITUITION">
+          <Key>
+            <PropertyRef Name="InstituitionID" />
+          </Key>
+          <Property Name="InstituitionID" Type="Int32" Nullable="false" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="InstituitionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CITY" Relationship="Self.FK_INSTITUITION_CITY" FromRole="INSTITUITION" ToRole="CITY" />
+        </EntityType>
+        <EntityType Name="LEVEL">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="Int32" Nullable="false" />
+          <Property Name="LevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LevelMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GRADEs" Relationship="Self.FK_GRADE_LEVEL" FromRole="LEVEL" ToRole="GRADE" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="Int32" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CITies" Relationship="Self.FK_CITY_REGION" FromRole="REGION" ToRole="CITY" />
+          <NavigationProperty Name="COUNTRY" Relationship="Self.FK_REGION_COUNTRY" FromRole="REGION" ToRole="COUNTRY" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="COUNTRY" Relationship="Self.FK_STUDENT_COUNTRY" FromRole="STUDENT" ToRole="COUNTRY" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_STUDENT_USER" FromRole="STUDENT" ToRole="USER" />
+          <NavigationProperty Name="TestStudents" Relationship="Self.FK_TestStudent_STUDENT" FromRole="STUDENT" ToRole="TestStudent" />
+          <NavigationProperty Name="THEMEs" Relationship="Self.FK_THEME_STUDENT" FromRole="STUDENT" ToRole="THEME" />
+        </EntityType>
+        <EntityType Name="STUDENTSUBJECT">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubjectDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DEPARTMENTs" Relationship="Self.FK_DEPARTMENT_STUDENTSUBJECT" FromRole="STUDENTSUBJECT" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="GRADE" Relationship="Self.FK_STUDENTSUBJECT_GRADE" FromRole="STUDENTSUBJECT" ToRole="GRADE" />
+          <NavigationProperty Name="SUBJECTFACTs" Relationship="Self.FK_SUBJECTFACT_STUDENTSUBJECT" FromRole="STUDENTSUBJECT" ToRole="SUBJECTFACT" />
+          <NavigationProperty Name="TESTs" Relationship="Self.FK_TEST_STUDENTSUBJECT" FromRole="STUDENTSUBJECT" ToRole="TEST" />
+        </EntityType>
+        <EntityType Name="SUBJECTFACT">
+          <Key>
+            <PropertyRef Name="SubjectFactID" />
+          </Key>
+          <Property Name="SubjectFactID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectFactDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HistoryFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GeneralFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="STUDENTSUBJECT" Relationship="Self.FK_SUBJECTFACT_STUDENTSUBJECT" FromRole="SUBJECTFACT" ToRole="STUDENTSUBJECT" />
+        </EntityType>
+        <EntityType Name="TEST">
+          <Key>
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="TestID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="DateStarted" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="STUDENTSUBJECT" Relationship="Self.FK_TEST_STUDENTSUBJECT" FromRole="TEST" ToRole="STUDENTSUBJECT" />
+          <NavigationProperty Name="TestStudents" Relationship="Self.FK_TestStudent_TEST" FromRole="TEST" ToRole="TestStudent" />
+        </EntityType>
+        <EntityType Name="TestStudent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="TestID" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="STUDENT" Relationship="Self.FK_TestStudent_STUDENT" FromRole="TestStudent" ToRole="STUDENT" />
+          <NavigationProperty Name="TEST" Relationship="Self.FK_TestStudent_TEST" FromRole="TestStudent" ToRole="TEST" />
+        </EntityType>
+        <EntityType Name="THEME">
+          <Key>
+            <PropertyRef Name="ThemeID" />
+          </Key>
+          <Property Name="ThemeID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="ThemeMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="STUDENT" Relationship="Self.FK_THEME_STUDENT" FromRole="THEME" ToRole="STUDENT" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ADMINISTRATORs" Relationship="Self.FK_ADMINISTRATOR_USER" FromRole="USER" ToRole="ADMINISTRATOR" />
+          <NavigationProperty Name="STUDENTs" Relationship="Self.FK_STUDENT_USER" FromRole="USER" ToRole="STUDENT" />
+        </EntityType>
+        <Association Name="FK_ADMINISTRATOR_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="ADMINISTRATOR" Type="Self.ADMINISTRATOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ADMINISTRATOR">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITY_REGION">
+          <End Role="REGION" Type="Self.REGION" Multiplicity="1" />
+          <End Role="CITY" Type="Self.CITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGION">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="CITY">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INSTITUITION_CITY">
+          <End Role="CITY" Type="Self.CITY" Multiplicity="1" />
+          <End Role="INSTITUITION" Type="Self.INSTITUITION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITY">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="INSTITUITION">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REGION_COUNTRY">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="REGION" Type="Self.REGION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="REGION">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_COUNTRY">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPARTMENT_STUDENTSUBJECT">
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="1" />
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTSUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRADE_LEVEL">
+          <End Role="LEVEL" Type="Self.LEVEL" Multiplicity="1" />
+          <End Role="GRADE" Type="Self.GRADE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEVEL">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="GRADE">
+              <PropertyRef Name="LevelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENTSUBJECT_GRADE">
+          <End Role="GRADE" Type="Self.GRADE" Multiplicity="1" />
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRADE">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="STUDENTSUBJECT">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENT_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="STUDENT">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestStudent_STUDENT">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+          <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="TestStudent">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THEME_STUDENT">
+          <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
+          <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="THEME">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECTFACT_STUDENTSUBJECT">
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="1" />
+          <End Role="SUBJECTFACT" Type="Self.SUBJECTFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTSUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="SUBJECTFACT">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEST_STUDENTSUBJECT">
+          <End Role="STUDENTSUBJECT" Type="Self.STUDENTSUBJECT" Multiplicity="1" />
+          <End Role="TEST" Type="Self.TEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTSUBJECT">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="TEST">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestStudent_TEST">
+          <End Role="TEST" Type="Self.TEST" Multiplicity="1" />
+          <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TEST">
+              <PropertyRef Name="TestID" />
+            </Principal>
+            <Dependent Role="TestStudent">
+              <PropertyRef Name="TestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RandomEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINISTRATORs" EntityType="Self.ADMINISTRATOR" />
+          <EntitySet Name="CITies" EntityType="Self.CITY" />
+          <EntitySet Name="COUNTRies" EntityType="Self.COUNTRY" />
+          <EntitySet Name="DEPARTMENTs" EntityType="Self.DEPARTMENT" />
+          <EntitySet Name="GRADEs" EntityType="Self.GRADE" />
+          <EntitySet Name="INSTITUITIONs" EntityType="Self.INSTITUITION" />
+          <EntitySet Name="LEVELs" EntityType="Self.LEVEL" />
+          <EntitySet Name="REGIONs" EntityType="Self.REGION" />
+          <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
+          <EntitySet Name="STUDENTSUBJECTs" EntityType="Self.STUDENTSUBJECT" />
+          <EntitySet Name="SUBJECTFACTs" EntityType="Self.SUBJECTFACT" />
+          <EntitySet Name="TESTs" EntityType="Self.TEST" />
+          <EntitySet Name="TestStudents" EntityType="Self.TestStudent" />
+          <EntitySet Name="THEMEs" EntityType="Self.THEME" />
+          <EntitySet Name="USERs" EntityType="Self.USER" />
+          <AssociationSet Name="FK_ADMINISTRATOR_USER" Association="Self.FK_ADMINISTRATOR_USER">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="ADMINISTRATOR" EntitySet="ADMINISTRATORs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITY_REGION" Association="Self.FK_CITY_REGION">
+            <End Role="REGION" EntitySet="REGIONs" />
+            <End Role="CITY" EntitySet="CITies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INSTITUITION_CITY" Association="Self.FK_INSTITUITION_CITY">
+            <End Role="CITY" EntitySet="CITies" />
+            <End Role="INSTITUITION" EntitySet="INSTITUITIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REGION_COUNTRY" Association="Self.FK_REGION_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRies" />
+            <End Role="REGION" EntitySet="REGIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_COUNTRY" Association="Self.FK_STUDENT_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRies" />
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPARTMENT_STUDENTSUBJECT" Association="Self.FK_DEPARTMENT_STUDENTSUBJECT">
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECTs" />
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRADE_LEVEL" Association="Self.FK_GRADE_LEVEL">
+            <End Role="LEVEL" EntitySet="LEVELs" />
+            <End Role="GRADE" EntitySet="GRADEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENTSUBJECT_GRADE" Association="Self.FK_STUDENTSUBJECT_GRADE">
+            <End Role="GRADE" EntitySet="GRADEs" />
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENT_USER" Association="Self.FK_STUDENT_USER">
+            <End Role="USER" EntitySet="USERs" />
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestStudent_STUDENT" Association="Self.FK_TestStudent_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+            <End Role="TestStudent" EntitySet="TestStudents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THEME_STUDENT" Association="Self.FK_THEME_STUDENT">
+            <End Role="STUDENT" EntitySet="STUDENTs" />
+            <End Role="THEME" EntitySet="THEMEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECTFACT_STUDENTSUBJECT" Association="Self.FK_SUBJECTFACT_STUDENTSUBJECT">
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECTs" />
+            <End Role="SUBJECTFACT" EntitySet="SUBJECTFACTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEST_STUDENTSUBJECT" Association="Self.FK_TEST_STUDENTSUBJECT">
+            <End Role="STUDENTSUBJECT" EntitySet="STUDENTSUBJECTs" />
+            <End Role="TEST" EntitySet="TESTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestStudent_TEST" Association="Self.FK_TestStudent_TEST">
+            <End Role="TEST" EntitySet="TESTs" />
+            <End Role="TestStudent" EntitySet="TestStudents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RandomModelStoreContainer" CdmEntityContainer="RandomEntities">
+          <EntitySetMapping Name="ADMINISTRATORs">
+            <EntityTypeMapping TypeName="RandomModel.ADMINISTRATOR">
+              <MappingFragment StoreEntitySet="ADMINISTRATOR">
+                <ScalarProperty Name="AdministratorID" ColumnName="AdministratorID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Emailaddress" ColumnName="Emailaddress" />
+                <ScalarProperty Name="DateEmployed" ColumnName="DateEmployed" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CITies">
+            <EntityTypeMapping TypeName="RandomModel.CITY">
+              <MappingFragment StoreEntitySet="CITY">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRies">
+            <EntityTypeMapping TypeName="RandomModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPARTMENTs">
+            <EntityTypeMapping TypeName="RandomModel.DEPARTMENT">
+              <MappingFragment StoreEntitySet="DEPARTMENT">
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRADEs">
+            <EntityTypeMapping TypeName="RandomModel.GRADE">
+              <MappingFragment StoreEntitySet="GRADE">
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTITUITIONs">
+            <EntityTypeMapping TypeName="RandomModel.INSTITUITION">
+              <MappingFragment StoreEntitySet="INSTITUITION">
+                <ScalarProperty Name="InstituitionID" ColumnName="InstituitionID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="InstituitionName" ColumnName="InstituitionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LEVELs">
+            <EntityTypeMapping TypeName="RandomModel.LEVEL">
+              <MappingFragment StoreEntitySet="LEVEL">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+                <ScalarProperty Name="LevelMode" ColumnName="LevelMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGIONs">
+            <EntityTypeMapping TypeName="RandomModel.REGION">
+              <MappingFragment StoreEntitySet="REGION">
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENTs">
+            <EntityTypeMapping TypeName="RandomModel.STUDENT">
+              <MappingFragment StoreEntitySet="STUDENT">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENTSUBJECTs">
+            <EntityTypeMapping TypeName="RandomModel.STUDENTSUBJECT">
+              <MappingFragment StoreEntitySet="STUDENTSUBJECT">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="SubjectDescription" ColumnName="SubjectDescription" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUBJECTFACTs">
+            <EntityTypeMapping TypeName="RandomModel.SUBJECTFACT">
+              <MappingFragment StoreEntitySet="SUBJECTFACT">
+                <ScalarProperty Name="SubjectFactID" ColumnName="SubjectFactID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectFactDescription" ColumnName="SubjectFactDescription" />
+                <ScalarProperty Name="HistoryFact" ColumnName="HistoryFact" />
+                <ScalarProperty Name="GeneralFact" ColumnName="GeneralFact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TESTs">
+            <EntityTypeMapping TypeName="RandomModel.TEST">
+              <MappingFragment StoreEntitySet="TEST">
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestStudents">
+            <EntityTypeMapping TypeName="RandomModel.TestStudent">
+              <MappingFragment StoreEntitySet="TestStudent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THEMEs">
+            <EntityTypeMapping TypeName="RandomModel.THEME">
+              <MappingFragment StoreEntitySet="THEME">
+                <ScalarProperty Name="ThemeID" ColumnName="ThemeID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ThemeMode" ColumnName="ThemeMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="RandomModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
