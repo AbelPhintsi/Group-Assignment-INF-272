@@ -12,11 +12,11 @@ namespace RandomApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class INSTITUITION
+    public partial class INSTITUTION
     {
-        public int InstituitionID { get; set; }
+        public int InstitutionID { get; set; }
         public int CityID { get; set; }
-        public string InstituitionName { get; set; }
+        public string Name { get; set; }
     
         public virtual CITY CITY { get; set; }
     }

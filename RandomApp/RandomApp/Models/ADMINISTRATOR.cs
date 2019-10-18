@@ -14,14 +14,20 @@ namespace RandomApp.Models
     
     public partial class ADMINISTRATOR
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ADMINISTRATOR()
+        {
+            this.USERs = new HashSet<USER>();
+        }
+    
         public int AdministratorID { get; set; }
-        public int UserID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Emailaddress { get; set; }
+        public string EmailAddress { get; set; }
         public System.DateTime DateEmployed { get; set; }
         public string Active { get; set; }
     
-        public virtual USER USER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USER> USERs { get; set; }
     }
 }

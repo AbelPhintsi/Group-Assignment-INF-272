@@ -15,9 +15,9 @@ namespace RandomApp.Models
     public partial class THEME
     {
         public int ThemeID { get; set; }
-        public int StudentID { get; set; }
+        public int SubjectID { get; set; }
         public string ThemeMode { get; set; }
     
-        public virtual STUDENT STUDENT { get; set; }
+        public virtual SUBJECT SUBJECT { get; set; }
     }
 }

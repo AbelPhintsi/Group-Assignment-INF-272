@@ -15,10 +15,9 @@ namespace RandomApp.Models
     public partial class TestStudent
     {
         public int ID { get; set; }
-        public int StudentID { get; set; }
         public int TestID { get; set; }
+        public int StudentID { get; set; }
         public decimal Mark { get; set; }
-        public System.DateTime DateCompleted { get; set; }
     
         public virtual STUDENT STUDENT { get; set; }
         public virtual TEST TEST { get; set; }

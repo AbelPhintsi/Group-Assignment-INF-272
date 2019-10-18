@@ -14,20 +14,16 @@ namespace RandomApp.Models
     
     public partial class USER
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public USER()
-        {
-            this.ADMINISTRATORs = new HashSet<ADMINISTRATOR>();
-            this.STUDENTs = new HashSet<STUDENT>();
-        }
-    
-        public int UserID { get; set; }
+        public int ID { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
+        public string UserEmail { get; set; }
+        public string UserPassword { get; set; }
+        public string GUID { get; set; }
+        public System.DateTime GUIDExpiry { get; set; }
+        public int AdministratorID { get; set; }
+        public int StudentID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ADMINISTRATOR> ADMINISTRATORs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STUDENT> STUDENTs { get; set; }
+        public virtual ADMINISTRATOR ADMINISTRATOR { get; set; }
+        public virtual STUDENT STUDENT { get; set; }
     }
 }

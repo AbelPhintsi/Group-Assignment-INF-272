@@ -192,7 +192,7 @@
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\INSTITUITION.cs">
+    <Compile Include="Models\INSTITUTION.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LEVEL.cs">
@@ -220,7 +220,7 @@
     <Compile Include="Models\STUDENT.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\STUDENTSUBJECT.cs">
+    <Compile Include="Models\SUBJECT.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SUBJECTFACT.cs">

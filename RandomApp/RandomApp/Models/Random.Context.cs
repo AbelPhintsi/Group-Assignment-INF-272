@@ -13,10 +13,10 @@ namespace RandomApp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RandomEntities : DbContext
+    public partial class DatabaseRandomEntities : DbContext
     {
-        public RandomEntities()
-            : base("name=RandomEntities")
+        public DatabaseRandomEntities()
+            : base("name=DatabaseRandomEntities")
         {
         }
     
@@ -30,11 +30,11 @@ namespace RandomApp.Models
         public virtual DbSet<COUNTRY> COUNTRies { get; set; }
         public virtual DbSet<DEPARTMENT> DEPARTMENTs { get; set; }
         public virtual DbSet<GRADE> GRADEs { get; set; }
-        public virtual DbSet<INSTITUITION> INSTITUITIONs { get; set; }
+        public virtual DbSet<INSTITUTION> INSTITUTIONs { get; set; }
         public virtual DbSet<LEVEL> LEVELs { get; set; }
         public virtual DbSet<REGION> REGIONs { get; set; }
         public virtual DbSet<STUDENT> STUDENTs { get; set; }
-        public virtual DbSet<STUDENTSUBJECT> STUDENTSUBJECTs { get; set; }
+        public virtual DbSet<SUBJECT> SUBJECTs { get; set; }
         public virtual DbSet<SUBJECTFACT> SUBJECTFACTs { get; set; }
         public virtual DbSet<TEST> TESTs { get; set; }
         public virtual DbSet<TestStudent> TestStudents { get; set; }
