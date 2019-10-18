@@ -17,7 +17,7 @@ namespace RandomApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GRADE()
         {
-            this.STUDENTSUBJECTs = new HashSet<STUDENTSUBJECT>();
+            this.SUBJECTs = new HashSet<SUBJECT>();
         }
     
         public int GradeID { get; set; }
@@ -26,6 +26,6 @@ namespace RandomApp.Models
     
         public virtual LEVEL LEVEL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<STUDENTSUBJECT> STUDENTSUBJECTs { get; set; }
+        public virtual ICollection<SUBJECT> SUBJECTs { get; set; }
     }
 }

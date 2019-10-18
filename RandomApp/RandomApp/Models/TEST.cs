@@ -25,7 +25,7 @@ namespace RandomApp.Models
         public System.DateTime DateStarted { get; set; }
         public System.DateTime DateCompleted { get; set; }
     
-        public virtual STUDENTSUBJECT STUDENTSUBJECT { get; set; }
+        public virtual SUBJECT SUBJECT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestStudent> TestStudents { get; set; }
     }

@@ -14,12 +14,12 @@ namespace RandomApp.Models
     
     public partial class SUBJECTFACT
     {
-        public int SubjectFactID { get; set; }
+        public string SubjectFactID { get; set; }
         public int SubjectID { get; set; }
-        public string SubjectFactDescription { get; set; }
+        public string Description { get; set; }
         public string HistoryFact { get; set; }
         public string GeneralFact { get; set; }
     
-        public virtual STUDENTSUBJECT STUDENTSUBJECT { get; set; }
+        public virtual SUBJECT SUBJECT { get; set; }
     }
 }

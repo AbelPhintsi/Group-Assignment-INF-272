@@ -4,36 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ed1b378631f74059a68182aeba4142d3" Name="Diagram1">
-        <EntityTypeShape EntityType="RandomModel.ADMINISTRATOR" Width="1.5" PointX="7.5" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.CITY" Width="1.5" PointX="9.75" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.COUNTRY" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.DEPARTMENT" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.GRADE" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.INSTITUITION" Width="1.5" PointX="12" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.LEVEL" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.REGION" Width="1.5" PointX="7.5" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.STUDENT" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.STUDENTSUBJECT" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.SUBJECTFACT" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.TEST" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.TestStudent" Width="1.5" PointX="9.75" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.THEME" Width="1.5" PointX="9.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="RandomModel.USER" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
-        <AssociationConnector Association="RandomModel.FK_ADMINISTRATOR_USER" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_CITY_REGION" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_INSTITUITION_CITY" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_REGION_COUNTRY" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_STUDENT_COUNTRY" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_DEPARTMENT_STUDENTSUBJECT" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_GRADE_LEVEL" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_STUDENTSUBJECT_GRADE" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_STUDENT_USER" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_TestStudent_STUDENT" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_THEME_STUDENT" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_SUBJECTFACT_STUDENTSUBJECT" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_TEST_STUDENTSUBJECT" ManuallyRouted="false" />
-        <AssociationConnector Association="RandomModel.FK_TestStudent_TEST" ManuallyRouted="false" />
+      <Diagram DiagramId="a0dd45e73c474a0ebc9bd1e2a81dcedc" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseRandomModel.ADMINISTRATOR" Width="1.5" PointX="7.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.CITY" Width="1.5" PointX="9.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.COUNTRY" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.DEPARTMENT" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.GRADE" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.INSTITUTION" Width="1.5" PointX="12" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.LEVEL" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.REGION" Width="1.5" PointX="7.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.STUDENT" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.SUBJECT" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.SUBJECTFACT" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.TEST" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.TestStudent" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.THEME" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.USER" Width="1.5" PointX="9.75" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_USER_ADMINISTRATOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_CITY_REGION" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_INSTITUTION_CITY" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_REGION_COUNTRY" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_STUDENT_COUNTRY" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_DEPARTMENT_SUBJECT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_GRADE_LEVEL" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_SUBJECT_GRADE" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_TestStudent_STUDENT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_USER_STUDENT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_TEST_SUBJECT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_THEME_SUBJECT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_TestStudent_TEST" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

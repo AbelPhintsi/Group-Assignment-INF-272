@@ -18,21 +18,19 @@ namespace RandomApp.Models
         public STUDENT()
         {
             this.TestStudents = new HashSet<TestStudent>();
-            this.THEMEs = new HashSet<THEME>();
+            this.USERs = new HashSet<USER>();
         }
     
         public int StudentID { get; set; }
-        public int UserID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
         public int CountryID { get; set; }
     
         public virtual COUNTRY COUNTRY { get; set; }
-        public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TestStudent> TestStudents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THEME> THEMEs { get; set; }
+        public virtual ICollection<USER> USERs { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace RandomApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CITY()
         {
-            this.INSTITUITIONs = new HashSet<INSTITUITION>();
+            this.INSTITUTIONs = new HashSet<INSTITUTION>();
         }
     
         public int CityID { get; set; }
@@ -26,6 +26,6 @@ namespace RandomApp.Models
     
         public virtual REGION REGION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INSTITUITION> INSTITUITIONs { get; set; }
+        public virtual ICollection<INSTITUTION> INSTITUTIONs { get; set; }
     }
 }
