@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DatabaseRandomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DatabaseRandomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMINISTRATOR">
           <Key>
             <PropertyRef Name="AdministratorID" />
@@ -15,6 +15,22 @@
           <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DateEmployed" Type="datetime" Nullable="false" />
           <Property Name="Active" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="int" Nullable="false" />
+          <Property Name="AnswerText" Type="nchar" MaxLength="50" />
+          <Property Name="QuestionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Choice">
+          <Key>
+            <PropertyRef Name="ChoiceID" />
+          </Key>
+          <Property Name="ChoiceID" Type="int" Nullable="false" />
+          <Property Name="ChoiceText" Type="nchar" MaxLength="50" />
+          <Property Name="QuestionID" Type="int" />
         </EntityType>
         <EntityType Name="CITY">
           <Key>
@@ -31,21 +47,12 @@
           <Property Name="CountryID" Type="int" Nullable="false" />
           <Property Name="CountryName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="DEPARTMENT">
-          <Key>
-            <PropertyRef Name="DepartmentID" />
-          </Key>
-          <Property Name="DepartmentID" Type="int" Nullable="false" />
-          <Property Name="SubjectID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="GRADE">
+        <EntityType Name="Grade">
           <Key>
             <PropertyRef Name="GradeID" />
           </Key>
           <Property Name="GradeID" Type="int" Nullable="false" />
-          <Property Name="LevelID" Type="int" Nullable="false" />
-          <Property Name="GradeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GradeText" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="INSTITUTION">
           <Key>
@@ -55,13 +62,22 @@
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="LEVEL">
+        <EntityType Name="Question">
           <Key>
-            <PropertyRef Name="LevelID" />
+            <PropertyRef Name="QuestionID" />
           </Key>
-          <Property Name="LevelID" Type="int" Nullable="false" />
-          <Property Name="LevelName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="LevelMode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="QuestionText" Type="nchar" MaxLength="50" />
+          <Property Name="QuizID" Type="int" />
+        </EntityType>
+        <EntityType Name="Quiz">
+          <Key>
+            <PropertyRef Name="QuizID" />
+          </Key>
+          <Property Name="QuizID" Type="int" Nullable="false" />
+          <Property Name="QuizName" Type="nchar" MaxLength="50" />
+          <Property Name="SubjectID" Type="int" />
+          <Property Name="GradeID" Type="int" />
         </EntityType>
         <EntityType Name="REGION">
           <Key>
@@ -81,14 +97,12 @@
           <Property Name="PhoneNumber" Type="int" Nullable="false" />
           <Property Name="CountryID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="SUBJECT">
+        <EntityType Name="Subject">
           <Key>
             <PropertyRef Name="SubjectID" />
           </Key>
           <Property Name="SubjectID" Type="int" Nullable="false" />
-          <Property Name="GradeID" Type="int" Nullable="false" />
-          <Property Name="SubjectName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SubjectDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubjectText" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="SUBJECTFACT">
           <Key>
@@ -139,6 +153,30 @@
           <Property Name="AdministratorID" Type="int" Nullable="false" />
           <Property Name="StudentID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Answer_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+          <End Role="Answer" Type="Self.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Choice_Question">
+          <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+          <End Role="Choice" Type="Self.Choice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Choice">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CITY_REGION">
           <End Role="REGION" Type="Self.REGION" Multiplicity="1" />
           <End Role="CITY" Type="Self.CITY" Multiplicity="*" />
@@ -151,30 +189,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DEPARTMENT_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
-          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUBJECT">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="DEPARTMENT">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GRADE_LEVEL">
-          <End Role="LEVEL" Type="Self.LEVEL" Multiplicity="1" />
-          <End Role="GRADE" Type="Self.GRADE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LEVEL">
-              <PropertyRef Name="LevelID" />
-            </Principal>
-            <Dependent Role="GRADE">
-              <PropertyRef Name="LevelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_INSTITUTION_CITY">
           <End Role="CITY" Type="Self.CITY" Multiplicity="1" />
           <End Role="INSTITUTION" Type="Self.INSTITUTION" Multiplicity="*" />
@@ -184,6 +198,42 @@
             </Principal>
             <Dependent Role="INSTITUTION">
               <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Quiz">
+          <End Role="Quiz" Type="Self.Quiz" Multiplicity="0..1" />
+          <End Role="Question" Type="Self.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quiz">
+              <PropertyRef Name="QuizID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuizID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quiz_GRADE">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="Quiz" Type="Self.Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quiz_SUBJECT">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Quiz" Type="Self.Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="SubjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -211,23 +261,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SUBJECT_GRADE">
-          <End Role="GRADE" Type="Self.GRADE" Multiplicity="1" />
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GRADE">
-              <PropertyRef Name="GradeID" />
-            </Principal>
-            <Dependent Role="SUBJECT">
-              <PropertyRef Name="GradeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SUBJECTFACT_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
           <End Role="SUBJECTFACT" Type="Self.SUBJECTFACT" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SUBJECT">
+            <Principal Role="Subject">
               <PropertyRef Name="SubjectID" />
             </Principal>
             <Dependent Role="SUBJECTFACT">
@@ -236,10 +274,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TEST_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
           <End Role="TEST" Type="Self.TEST" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SUBJECT">
+            <Principal Role="Subject">
               <PropertyRef Name="SubjectID" />
             </Principal>
             <Dependent Role="TEST">
@@ -272,10 +310,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_THEME_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
+          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
           <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SUBJECT">
+            <Principal Role="Subject">
               <PropertyRef Name="SubjectID" />
             </Principal>
             <Dependent Role="THEME">
@@ -309,35 +347,49 @@
         </Association>
         <EntityContainer Name="DatabaseRandomModelStoreContainer">
           <EntitySet Name="ADMINISTRATOR" EntityType="Self.ADMINISTRATOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Choice" EntityType="Self.Choice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CITY" EntityType="Self.CITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GRADE" EntityType="Self.GRADE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INSTITUTION" EntityType="Self.INSTITUTION" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LEVEL" EntityType="Self.LEVEL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quiz" EntityType="Self.Quiz" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REGION" EntityType="Self.REGION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SUBJECT" EntityType="Self.SUBJECT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUBJECTFACT" EntityType="Self.SUBJECTFACT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TEST" EntityType="Self.TEST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestStudent" EntityType="Self.TestStudent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THEME" EntityType="Self.THEME" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Choice_Question" Association="Self.FK_Choice_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Choice" EntitySet="Choice" />
+          </AssociationSet>
           <AssociationSet Name="FK_CITY_REGION" Association="Self.FK_CITY_REGION">
             <End Role="REGION" EntitySet="REGION" />
             <End Role="CITY" EntitySet="CITY" />
           </AssociationSet>
-          <AssociationSet Name="FK_DEPARTMENT_SUBJECT" Association="Self.FK_DEPARTMENT_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECT" />
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GRADE_LEVEL" Association="Self.FK_GRADE_LEVEL">
-            <End Role="LEVEL" EntitySet="LEVEL" />
-            <End Role="GRADE" EntitySet="GRADE" />
-          </AssociationSet>
           <AssociationSet Name="FK_INSTITUTION_CITY" Association="Self.FK_INSTITUTION_CITY">
             <End Role="CITY" EntitySet="CITY" />
             <End Role="INSTITUTION" EntitySet="INSTITUTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Quiz" Association="Self.FK_Question_Quiz">
+            <End Role="Quiz" EntitySet="Quiz" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quiz_GRADE" Association="Self.FK_Quiz_GRADE">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="Quiz" EntitySet="Quiz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quiz_SUBJECT" Association="Self.FK_Quiz_SUBJECT">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Quiz" EntitySet="Quiz" />
           </AssociationSet>
           <AssociationSet Name="FK_REGION_COUNTRY" Association="Self.FK_REGION_COUNTRY">
             <End Role="COUNTRY" EntitySet="COUNTRY" />
@@ -347,16 +399,12 @@
             <End Role="COUNTRY" EntitySet="COUNTRY" />
             <End Role="STUDENT" EntitySet="STUDENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_SUBJECT_GRADE" Association="Self.FK_SUBJECT_GRADE">
-            <End Role="GRADE" EntitySet="GRADE" />
-            <End Role="SUBJECT" EntitySet="SUBJECT" />
-          </AssociationSet>
           <AssociationSet Name="FK_SUBJECTFACT_SUBJECT" Association="Self.FK_SUBJECTFACT_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="Subject" EntitySet="Subject" />
             <End Role="SUBJECTFACT" EntitySet="SUBJECTFACT" />
           </AssociationSet>
           <AssociationSet Name="FK_TEST_SUBJECT" Association="Self.FK_TEST_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="Subject" EntitySet="Subject" />
             <End Role="TEST" EntitySet="TEST" />
           </AssociationSet>
           <AssociationSet Name="FK_TestStudent_STUDENT" Association="Self.FK_TestStudent_STUDENT">
@@ -368,7 +416,7 @@
             <End Role="TestStudent" EntitySet="TestStudent" />
           </AssociationSet>
           <AssociationSet Name="FK_THEME_SUBJECT" Association="Self.FK_THEME_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECT" />
+            <End Role="Subject" EntitySet="Subject" />
             <End Role="THEME" EntitySet="THEME" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_ADMINISTRATOR" Association="Self.FK_USER_ADMINISTRATOR">
@@ -380,8 +428,7 @@
             <End Role="USER" EntitySet="USER" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DatabaseRandomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -416,25 +463,6 @@
           <NavigationProperty Name="REGIONs" Relationship="Self.FK_REGION_COUNTRY" FromRole="COUNTRY" ToRole="REGION" />
           <NavigationProperty Name="STUDENTs" Relationship="Self.FK_STUDENT_COUNTRY" FromRole="COUNTRY" ToRole="STUDENT" />
         </EntityType>
-        <EntityType Name="DEPARTMENT">
-          <Key>
-            <PropertyRef Name="DepartmentID" />
-          </Key>
-          <Property Name="DepartmentID" Type="Int32" Nullable="false" />
-          <Property Name="SubjectID" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_DEPARTMENT_SUBJECT" FromRole="DEPARTMENT" ToRole="SUBJECT" />
-        </EntityType>
-        <EntityType Name="GRADE">
-          <Key>
-            <PropertyRef Name="GradeID" />
-          </Key>
-          <Property Name="GradeID" Type="Int32" Nullable="false" />
-          <Property Name="LevelID" Type="Int32" Nullable="false" />
-          <Property Name="GradeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="LEVEL" Relationship="Self.FK_GRADE_LEVEL" FromRole="GRADE" ToRole="LEVEL" />
-          <NavigationProperty Name="SUBJECTs" Relationship="Self.FK_SUBJECT_GRADE" FromRole="GRADE" ToRole="SUBJECT" />
-        </EntityType>
         <EntityType Name="INSTITUTION">
           <Key>
             <PropertyRef Name="InstitutionID" />
@@ -443,15 +471,6 @@
           <Property Name="CityID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CITY" Relationship="Self.FK_INSTITUTION_CITY" FromRole="INSTITUTION" ToRole="CITY" />
-        </EntityType>
-        <EntityType Name="LEVEL">
-          <Key>
-            <PropertyRef Name="LevelID" />
-          </Key>
-          <Property Name="LevelID" Type="Int32" Nullable="false" />
-          <Property Name="LevelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LevelMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="GRADEs" Relationship="Self.FK_GRADE_LEVEL" FromRole="LEVEL" ToRole="GRADE" />
         </EntityType>
         <EntityType Name="REGION">
           <Key>
@@ -476,20 +495,6 @@
           <NavigationProperty Name="TestStudents" Relationship="Self.FK_TestStudent_STUDENT" FromRole="STUDENT" ToRole="TestStudent" />
           <NavigationProperty Name="USERs" Relationship="Self.FK_USER_STUDENT" FromRole="STUDENT" ToRole="USER" />
         </EntityType>
-        <EntityType Name="SUBJECT">
-          <Key>
-            <PropertyRef Name="SubjectID" />
-          </Key>
-          <Property Name="SubjectID" Type="Int32" Nullable="false" />
-          <Property Name="GradeID" Type="Int32" Nullable="false" />
-          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SubjectDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="DEPARTMENTs" Relationship="Self.FK_DEPARTMENT_SUBJECT" FromRole="SUBJECT" ToRole="DEPARTMENT" />
-          <NavigationProperty Name="GRADE" Relationship="Self.FK_SUBJECT_GRADE" FromRole="SUBJECT" ToRole="GRADE" />
-          <NavigationProperty Name="SUBJECTFACTs" Relationship="Self.FK_SUBJECTFACT_SUBJECT" FromRole="SUBJECT" ToRole="SUBJECTFACT" />
-          <NavigationProperty Name="TESTs" Relationship="Self.FK_TEST_SUBJECT" FromRole="SUBJECT" ToRole="TEST" />
-          <NavigationProperty Name="THEMEs" Relationship="Self.FK_THEME_SUBJECT" FromRole="SUBJECT" ToRole="THEME" />
-        </EntityType>
         <EntityType Name="SUBJECTFACT">
           <Key>
             <PropertyRef Name="SubjectFactID" />
@@ -499,7 +504,7 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HistoryFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="GeneralFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_SUBJECTFACT_SUBJECT" FromRole="SUBJECTFACT" ToRole="SUBJECT" />
+          <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" FromRole="SUBJECTFACT" ToRole="Subject" />
         </EntityType>
         <EntityType Name="TEST">
           <Key>
@@ -509,8 +514,8 @@
           <Property Name="SubjectID" Type="Int32" Nullable="false" />
           <Property Name="DateStarted" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_TEST_SUBJECT" FromRole="TEST" ToRole="SUBJECT" />
           <NavigationProperty Name="TestStudents" Relationship="Self.FK_TestStudent_TEST" FromRole="TEST" ToRole="TestStudent" />
+          <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT" FromRole="TEST" ToRole="Subject" />
         </EntityType>
         <EntityType Name="TestStudent">
           <Key>
@@ -530,7 +535,7 @@
           <Property Name="ThemeID" Type="Int32" Nullable="false" />
           <Property Name="SubjectID" Type="Int32" Nullable="false" />
           <Property Name="ThemeMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="SUBJECT" Relationship="Self.FK_THEME_SUBJECT" FromRole="THEME" ToRole="SUBJECT" />
+          <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT" FromRole="THEME" ToRole="Subject" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -607,42 +612,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DEPARTMENT_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
-          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUBJECT">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="DEPARTMENT">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GRADE_LEVEL">
-          <End Role="LEVEL" Type="Self.LEVEL" Multiplicity="1" />
-          <End Role="GRADE" Type="Self.GRADE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LEVEL">
-              <PropertyRef Name="LevelID" />
-            </Principal>
-            <Dependent Role="GRADE">
-              <PropertyRef Name="LevelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SUBJECT_GRADE">
-          <End Role="GRADE" Type="Self.GRADE" Multiplicity="1" />
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GRADE">
-              <PropertyRef Name="GradeID" />
-            </Principal>
-            <Dependent Role="SUBJECT">
-              <PropertyRef Name="GradeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestStudent_STUDENT">
           <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
           <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
@@ -667,42 +636,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SUBJECTFACT_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
-          <End Role="SUBJECTFACT" Type="Self.SUBJECTFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUBJECT">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="SUBJECTFACT">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TEST_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
-          <End Role="TEST" Type="Self.TEST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUBJECT">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="TEST">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_THEME_SUBJECT">
-          <End Role="SUBJECT" Type="Self.SUBJECT" Multiplicity="1" />
-          <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUBJECT">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="THEME">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestStudent_TEST">
           <End Role="TEST" Type="Self.TEST" Multiplicity="1" />
           <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
@@ -719,13 +652,9 @@
           <EntitySet Name="ADMINISTRATORs" EntityType="Self.ADMINISTRATOR" />
           <EntitySet Name="CITies" EntityType="Self.CITY" />
           <EntitySet Name="COUNTRies" EntityType="Self.COUNTRY" />
-          <EntitySet Name="DEPARTMENTs" EntityType="Self.DEPARTMENT" />
-          <EntitySet Name="GRADEs" EntityType="Self.GRADE" />
           <EntitySet Name="INSTITUTIONs" EntityType="Self.INSTITUTION" />
-          <EntitySet Name="LEVELs" EntityType="Self.LEVEL" />
           <EntitySet Name="REGIONs" EntityType="Self.REGION" />
           <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
-          <EntitySet Name="SUBJECTs" EntityType="Self.SUBJECT" />
           <EntitySet Name="SUBJECTFACTs" EntityType="Self.SUBJECTFACT" />
           <EntitySet Name="TESTs" EntityType="Self.TEST" />
           <EntitySet Name="TestStudents" EntityType="Self.TestStudent" />
@@ -751,18 +680,6 @@
             <End Role="COUNTRY" EntitySet="COUNTRies" />
             <End Role="STUDENT" EntitySet="STUDENTs" />
           </AssociationSet>
-          <AssociationSet Name="FK_DEPARTMENT_SUBJECT" Association="Self.FK_DEPARTMENT_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECTs" />
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GRADE_LEVEL" Association="Self.FK_GRADE_LEVEL">
-            <End Role="LEVEL" EntitySet="LEVELs" />
-            <End Role="GRADE" EntitySet="GRADEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SUBJECT_GRADE" Association="Self.FK_SUBJECT_GRADE">
-            <End Role="GRADE" EntitySet="GRADEs" />
-            <End Role="SUBJECT" EntitySet="SUBJECTs" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestStudent_STUDENT" Association="Self.FK_TestStudent_STUDENT">
             <End Role="STUDENT" EntitySet="STUDENTs" />
             <End Role="TestStudent" EntitySet="TestStudents" />
@@ -771,23 +688,205 @@
             <End Role="STUDENT" EntitySet="STUDENTs" />
             <End Role="USER" EntitySet="USERs" />
           </AssociationSet>
-          <AssociationSet Name="FK_SUBJECTFACT_SUBJECT" Association="Self.FK_SUBJECTFACT_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECTs" />
-            <End Role="SUBJECTFACT" EntitySet="SUBJECTFACTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TEST_SUBJECT" Association="Self.FK_TEST_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECTs" />
-            <End Role="TEST" EntitySet="TESTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_THEME_SUBJECT" Association="Self.FK_THEME_SUBJECT">
-            <End Role="SUBJECT" EntitySet="SUBJECTs" />
-            <End Role="THEME" EntitySet="THEMEs" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestStudent_TEST" Association="Self.FK_TestStudent_TEST">
             <End Role="TEST" EntitySet="TESTs" />
             <End Role="TestStudent" EntitySet="TestStudents" />
           </AssociationSet>
+          <EntitySet Name="Answers" EntityType="DatabaseRandomModel.Answer" />
+          <EntitySet Name="Choices" EntityType="DatabaseRandomModel.Choice" />
+          <EntitySet Name="Grades" EntityType="DatabaseRandomModel.Grade" />
+          <EntitySet Name="Questions" EntityType="DatabaseRandomModel.Question" />
+          <EntitySet Name="Quizs" EntityType="DatabaseRandomModel.Quiz" />
+          <EntitySet Name="Subjects" EntityType="DatabaseRandomModel.Subject" />
+          <AssociationSet Name="FK_Answer_Question" Association="DatabaseRandomModel.FK_Answer_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Choice_Question" Association="DatabaseRandomModel.FK_Choice_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Choice" EntitySet="Choices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quiz_GRADE" Association="DatabaseRandomModel.FK_Quiz_GRADE">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="Quiz" EntitySet="Quizs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Quiz" Association="DatabaseRandomModel.FK_Question_Quiz">
+            <End Role="Quiz" EntitySet="Quizs" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quiz_SUBJECT" Association="DatabaseRandomModel.FK_Quiz_SUBJECT">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Quiz" EntitySet="Quizs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SUBJECTFACT_SUBJECT" Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="SUBJECTFACT" EntitySet="SUBJECTFACTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TEST_SUBJECT" Association="DatabaseRandomModel.FK_TEST_SUBJECT">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="TEST" EntitySet="TESTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_THEME_SUBJECT" Association="DatabaseRandomModel.FK_THEME_SUBJECT">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="THEME" EntitySet="THEMEs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="Int32" Nullable="false" />
+          <Property Name="AnswerText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="QuestionID" Type="Int32" />
+          <NavigationProperty Name="Question" Relationship="DatabaseRandomModel.FK_Answer_Question" FromRole="Answer" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Choice">
+          <Key>
+            <PropertyRef Name="ChoiceID" />
+          </Key>
+          <Property Name="ChoiceID" Type="Int32" Nullable="false" />
+          <Property Name="ChoiceText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="QuestionID" Type="Int32" />
+          <NavigationProperty Name="Question" Relationship="DatabaseRandomModel.FK_Choice_Question" FromRole="Choice" ToRole="Question" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="GradeText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Quizs" Relationship="DatabaseRandomModel.FK_Quiz_GRADE" FromRole="Grade" ToRole="Quiz" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionID" />
+          </Key>
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="QuizID" Type="Int32" />
+          <NavigationProperty Name="Answers" Relationship="DatabaseRandomModel.FK_Answer_Question" FromRole="Question" ToRole="Answer" />
+          <NavigationProperty Name="Choices" Relationship="DatabaseRandomModel.FK_Choice_Question" FromRole="Question" ToRole="Choice" />
+          <NavigationProperty Name="Quiz" Relationship="DatabaseRandomModel.FK_Question_Quiz" FromRole="Question" ToRole="Quiz" />
+        </EntityType>
+        <EntityType Name="Quiz">
+          <Key>
+            <PropertyRef Name="QuizID" />
+          </Key>
+          <Property Name="QuizID" Type="Int32" Nullable="false" />
+          <Property Name="QuizName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SubjectID" Type="Int32" />
+          <Property Name="GradeID" Type="Int32" />
+          <NavigationProperty Name="Grade" Relationship="DatabaseRandomModel.FK_Quiz_GRADE" FromRole="Quiz" ToRole="Grade" />
+          <NavigationProperty Name="Questions" Relationship="DatabaseRandomModel.FK_Question_Quiz" FromRole="Quiz" ToRole="Question" />
+          <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_Quiz_SUBJECT" FromRole="Quiz" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Quizs" Relationship="DatabaseRandomModel.FK_Quiz_SUBJECT" FromRole="Subject" ToRole="Quiz" />
+          <NavigationProperty Name="SUBJECTFACTs" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" FromRole="Subject" ToRole="SUBJECTFACT" />
+          <NavigationProperty Name="TESTs" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT" FromRole="Subject" ToRole="TEST" />
+          <NavigationProperty Name="THEMEs" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT" FromRole="Subject" ToRole="THEME" />
+        </EntityType>
+        <Association Name="FK_Answer_Question">
+          <End Type="DatabaseRandomModel.Question" Role="Question" Multiplicity="0..1" />
+          <End Type="DatabaseRandomModel.Answer" Role="Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Choice_Question">
+          <End Type="DatabaseRandomModel.Question" Role="Question" Multiplicity="0..1" />
+          <End Type="DatabaseRandomModel.Choice" Role="Choice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionID" />
+            </Principal>
+            <Dependent Role="Choice">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quiz_GRADE">
+          <End Type="DatabaseRandomModel.Grade" Role="Grade" Multiplicity="0..1" />
+          <End Type="DatabaseRandomModel.Quiz" Role="Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Quiz">
+          <End Type="DatabaseRandomModel.Quiz" Role="Quiz" Multiplicity="0..1" />
+          <End Type="DatabaseRandomModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quiz">
+              <PropertyRef Name="QuizID" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuizID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quiz_SUBJECT">
+          <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="0..1" />
+          <End Type="DatabaseRandomModel.Quiz" Role="Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SUBJECTFACT_SUBJECT">
+          <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="DatabaseRandomModel.SUBJECTFACT" Role="SUBJECTFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="SUBJECTFACT">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TEST_SUBJECT">
+          <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="DatabaseRandomModel.TEST" Role="TEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="TEST">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_THEME_SUBJECT">
+          <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="1" />
+          <End Type="DatabaseRandomModel.THEME" Role="THEME" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="THEME">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -823,39 +922,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DEPARTMENTs">
-            <EntityTypeMapping TypeName="DatabaseRandomModel.DEPARTMENT">
-              <MappingFragment StoreEntitySet="DEPARTMENT">
-                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
-                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GRADEs">
-            <EntityTypeMapping TypeName="DatabaseRandomModel.GRADE">
-              <MappingFragment StoreEntitySet="GRADE">
-                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
-                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
-                <ScalarProperty Name="GradeName" ColumnName="GradeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="INSTITUTIONs">
             <EntityTypeMapping TypeName="DatabaseRandomModel.INSTITUTION">
               <MappingFragment StoreEntitySet="INSTITUTION">
                 <ScalarProperty Name="InstitutionID" ColumnName="InstitutionID" />
                 <ScalarProperty Name="CityID" ColumnName="CityID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LEVELs">
-            <EntityTypeMapping TypeName="DatabaseRandomModel.LEVEL">
-              <MappingFragment StoreEntitySet="LEVEL">
-                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
-                <ScalarProperty Name="LevelName" ColumnName="LevelName" />
-                <ScalarProperty Name="LevelMode" ColumnName="LevelMode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -876,16 +948,6 @@
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SUBJECTs">
-            <EntityTypeMapping TypeName="DatabaseRandomModel.SUBJECT">
-              <MappingFragment StoreEntitySet="SUBJECT">
-                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
-                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
-                <ScalarProperty Name="SubjectDescription" ColumnName="SubjectDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -940,6 +1002,59 @@
                 <ScalarProperty Name="GUIDExpiry" ColumnName="GUIDExpiry" />
                 <ScalarProperty Name="AdministratorID" ColumnName="AdministratorID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="DatabaseRandomModel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+                <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Choices">
+            <EntityTypeMapping TypeName="DatabaseRandomModel.Choice">
+              <MappingFragment StoreEntitySet="Choice">
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="ChoiceText" ColumnName="ChoiceText" />
+                <ScalarProperty Name="ChoiceID" ColumnName="ChoiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="DatabaseRandomModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="GradeText" ColumnName="GradeText" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="DatabaseRandomModel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="QuizID" ColumnName="QuizID" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quizs">
+            <EntityTypeMapping TypeName="DatabaseRandomModel.Quiz">
+              <MappingFragment StoreEntitySet="Quiz">
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="QuizName" ColumnName="QuizName" />
+                <ScalarProperty Name="QuizID" ColumnName="QuizID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="DatabaseRandomModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectText" ColumnName="SubjectText" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

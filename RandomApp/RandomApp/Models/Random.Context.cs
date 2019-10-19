@@ -28,17 +28,19 @@ namespace RandomApp.Models
         public virtual DbSet<ADMINISTRATOR> ADMINISTRATORs { get; set; }
         public virtual DbSet<CITY> CITies { get; set; }
         public virtual DbSet<COUNTRY> COUNTRies { get; set; }
-        public virtual DbSet<DEPARTMENT> DEPARTMENTs { get; set; }
-        public virtual DbSet<GRADE> GRADEs { get; set; }
         public virtual DbSet<INSTITUTION> INSTITUTIONs { get; set; }
-        public virtual DbSet<LEVEL> LEVELs { get; set; }
         public virtual DbSet<REGION> REGIONs { get; set; }
         public virtual DbSet<STUDENT> STUDENTs { get; set; }
-        public virtual DbSet<SUBJECT> SUBJECTs { get; set; }
         public virtual DbSet<SUBJECTFACT> SUBJECTFACTs { get; set; }
         public virtual DbSet<TEST> TESTs { get; set; }
         public virtual DbSet<TestStudent> TestStudents { get; set; }
         public virtual DbSet<THEME> THEMEs { get; set; }
         public virtual DbSet<USER> USERs { get; set; }
+        public virtual DbSet<Answer> Answers { get; set; }
+        public virtual DbSet<Choice> Choices { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Quiz> Quizs { get; set; }
+        public virtual DbSet<Subject> Subjects { get; set; }
     }
 }

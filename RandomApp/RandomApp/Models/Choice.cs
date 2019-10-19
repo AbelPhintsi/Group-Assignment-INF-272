@@ -12,12 +12,12 @@ namespace RandomApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DEPARTMENT
+    public partial class Choice
     {
-        public int DepartmentID { get; set; }
-        public int SubjectID { get; set; }
-        public string Name { get; set; }
+        public int ChoiceID { get; set; }
+        public string ChoiceText { get; set; }
+        public Nullable<int> QuestionID { get; set; }
     
-        public virtual SUBJECT SUBJECT { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

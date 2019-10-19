@@ -179,26 +179,32 @@
     <Compile Include="Models\ADMINISTRATOR.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Answer.cs">
+      <DependentUpon>Random.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Choice.cs">
+      <DependentUpon>Random.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CITY.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\COUNTRY.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DEPARTMENT.cs">
-      <DependentUpon>Random.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\GRADE.cs">
+    <Compile Include="Models\Grade.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\INSTITUTION.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LEVEL.cs">
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Question.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Quiz.cs">
+      <DependentUpon>Random.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Random.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -220,7 +226,7 @@
     <Compile Include="Models\STUDENT.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SUBJECT.cs">
+    <Compile Include="Models\Subject.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SUBJECTFACT.cs">

@@ -12,14 +12,12 @@ namespace RandomApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SUBJECTFACT
+    public partial class Answer
     {
-        public string SubjectFactID { get; set; }
-        public int SubjectID { get; set; }
-        public string Description { get; set; }
-        public string HistoryFact { get; set; }
-        public string GeneralFact { get; set; }
+        public int AnswerID { get; set; }
+        public string AnswerText { get; set; }
+        public Nullable<int> QuestionID { get; set; }
     
-        public virtual Subject Subject { get; set; }
+        public virtual Question Question { get; set; }
     }
 }

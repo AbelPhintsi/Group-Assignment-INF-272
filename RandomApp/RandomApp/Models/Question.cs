@@ -12,27 +12,23 @@ namespace RandomApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Subject
+    public partial class Question
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subject()
+        public Question()
         {
-            this.Quizs = new HashSet<Quiz>();
-            this.SUBJECTFACTs = new HashSet<SUBJECTFACT>();
-            this.TESTs = new HashSet<TEST>();
-            this.THEMEs = new HashSet<THEME>();
+            this.Answers = new HashSet<Answer>();
+            this.Choices = new HashSet<Choice>();
         }
     
-        public int SubjectID { get; set; }
-        public string SubjectText { get; set; }
+        public int QuestionID { get; set; }
+        public string QuestionText { get; set; }
+        public Nullable<int> QuizID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Quiz> Quizs { get; set; }
+        public virtual ICollection<Answer> Answers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SUBJECTFACT> SUBJECTFACTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TEST> TESTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THEME> THEMEs { get; set; }
+        public virtual ICollection<Choice> Choices { get; set; }
+        public virtual Quiz Quiz { get; set; }
     }
 }

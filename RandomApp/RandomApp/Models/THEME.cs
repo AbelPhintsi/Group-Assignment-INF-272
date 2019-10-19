@@ -18,6 +18,6 @@ namespace RandomApp.Models
         public int SubjectID { get; set; }
         public string ThemeMode { get; set; }
     
-        public virtual SUBJECT SUBJECT { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }
