@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<RandomApp.Models.Question>
 
 @{
-    ViewBag.Title = "Questions";
+    ViewBag.Title = "Index";
 }
 
-<h2>Add Questions to a Quiz</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -37,4 +37,4 @@
 }
 
 </table>
-@Html.ActionLink("Add Answers >", "Index", "Answers")
+@Html.ActionLink("Add Answers", "Index", "Answers")
