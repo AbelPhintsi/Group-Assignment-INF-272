@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<RandomApp.Models.Subject>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin";
 }
 
-<h2>Index</h2>
-
+<h3>Admin Home</h3>
+<h2>As an Admin, You can create a quiz for your students to take so they can test themselves wherever they are</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -31,3 +31,4 @@
 }
 
 </table>
+@Html.ActionLink("Add Grade >", "Index", "Grades")
