@@ -42,5 +42,9 @@ namespace RandomApp.Models
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Quiz> Quizs { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<DEPARTMENT> DEPARTMENTs { get; set; }
+        public virtual DbSet<GRADE1> GRADE1 { get; set; }
+        public virtual DbSet<LEVEL> LEVELs { get; set; }
+        public virtual DbSet<SUBJECT1> SUBJECT1 { get; set; }
     }
 }

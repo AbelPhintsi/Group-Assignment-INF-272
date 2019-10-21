@@ -12,22 +12,20 @@ namespace RandomApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TEST
+    public partial class GRADE1
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TEST()
+        public GRADE1()
         {
-            this.TestStudents = new HashSet<TestStudent>();
+            this.SUBJECTs = new HashSet<SUBJECT1>();
         }
     
-        public int TestID { get; set; }
-        public int SubjectID { get; set; }
-        public System.DateTime DateStarted { get; set; }
-        public System.DateTime DateCompleted { get; set; }
+        public int GradeID { get; set; }
+        public int LevelID { get; set; }
+        public string GradeName { get; set; }
     
+        public virtual LEVEL LEVEL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TestStudent> TestStudents { get; set; }
-        public virtual Subject Subject { get; set; }
-        public virtual SUBJECT1 SUBJECT { get; set; }
+        public virtual ICollection<SUBJECT1> SUBJECTs { get; set; }
     }
 }

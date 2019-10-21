@@ -21,5 +21,6 @@ namespace RandomApp.Models
         public string GeneralFact { get; set; }
     
         public virtual Subject Subject { get; set; }
+        public virtual SUBJECT1 SUBJECT { get; set; }
     }
 }

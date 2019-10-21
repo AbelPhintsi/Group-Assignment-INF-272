@@ -198,11 +198,20 @@
     <Compile Include="Models\COUNTRY.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DEPARTMENT.cs">
+      <DependentUpon>Random.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Grade.cs">
+      <DependentUpon>Random.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GRADE1.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\INSTITUTION.cs">
+      <DependentUpon>Random.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LEVEL.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
@@ -234,6 +243,9 @@
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Subject.cs">
+      <DependentUpon>Random.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SUBJECT1.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SUBJECTFACT.cs">

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Abel Phintsi\Documents\GitHub\Group-Assignment-INF-272\RandomApp\RandomApp\Models\Random.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\AubreyDubeWork\Desktop\Group-Assignment-INF-272\RandomApp\RandomApp\Models\Random.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

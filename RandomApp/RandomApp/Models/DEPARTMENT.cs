@@ -12,13 +12,12 @@ namespace RandomApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class THEME
+    public partial class DEPARTMENT
     {
-        public int ThemeID { get; set; }
+        public int DepartmentID { get; set; }
         public int SubjectID { get; set; }
-        public string ThemeMode { get; set; }
+        public string Name { get; set; }
     
-        public virtual Subject Subject { get; set; }
         public virtual SUBJECT1 SUBJECT { get; set; }
     }
 }

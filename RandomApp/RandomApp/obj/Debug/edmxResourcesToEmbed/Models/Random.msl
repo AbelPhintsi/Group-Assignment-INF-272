@@ -113,55 +113,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Answers">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.Answer">
-        <MappingFragment StoreEntitySet="Answer">
-          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
-          <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
-          <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Choices">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.Choice">
-        <MappingFragment StoreEntitySet="Choice">
-          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
-          <ScalarProperty Name="ChoiceText" ColumnName="ChoiceText" />
-          <ScalarProperty Name="ChoiceID" ColumnName="ChoiceID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Grades">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.Grade">
-        <MappingFragment StoreEntitySet="Grade">
-          <ScalarProperty Name="GradeText" ColumnName="GradeText" />
-          <ScalarProperty Name="GradeID" ColumnName="GradeID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Questions">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.Question">
-        <MappingFragment StoreEntitySet="Question">
-          <ScalarProperty Name="QuizID" ColumnName="QuizID" />
-          <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
-          <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Quizs">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.Quiz">
-        <MappingFragment StoreEntitySet="Quiz">
-          <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+    <EntitySetMapping Name="DEPARTMENTs">
+      <EntityTypeMapping TypeName="DatabaseRandomModel.DEPARTMENT">
+        <MappingFragment StoreEntitySet="DEPARTMENT">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-          <ScalarProperty Name="QuizName" ColumnName="QuizName" />
-          <ScalarProperty Name="QuizID" ColumnName="QuizID" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Subjects">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.Subject">
-        <MappingFragment StoreEntitySet="Subject">
-          <ScalarProperty Name="SubjectText" ColumnName="SubjectText" />
+    <EntitySetMapping Name="GRADE1">
+      <EntityTypeMapping TypeName="DatabaseRandomModel.GRADE1">
+        <MappingFragment StoreEntitySet="GRADE">
+          <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+          <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+          <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LEVELs">
+      <EntityTypeMapping TypeName="DatabaseRandomModel.LEVEL">
+        <MappingFragment StoreEntitySet="LEVEL">
+          <ScalarProperty Name="LevelMode" ColumnName="LevelMode" />
+          <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+          <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUBJECT1">
+      <EntityTypeMapping TypeName="DatabaseRandomModel.SUBJECT1">
+        <MappingFragment StoreEntitySet="SUBJECT">
+          <ScalarProperty Name="SubjectDescription" ColumnName="SubjectDescription" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+          <ScalarProperty Name="GradeID" ColumnName="GradeID" />
           <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
         </MappingFragment>
       </EntityTypeMapping>

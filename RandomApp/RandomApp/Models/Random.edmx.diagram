@@ -38,6 +38,16 @@
         <AssociationConnector Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" />
         <AssociationConnector Association="DatabaseRandomModel.FK_TEST_SUBJECT" />
         <AssociationConnector Association="DatabaseRandomModel.FK_THEME_SUBJECT" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.DEPARTMENT" Width="1.5" PointX="19.125" PointY="8.5" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.GRADE1" Width="1.5" PointX="14.625" PointY="8.375" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.LEVEL" Width="1.5" PointX="12.375" PointY="8.5" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.SUBJECT1" Width="1.5" PointX="16.875" PointY="8" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_DEPARTMENT_SUBJECT" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_GRADE_LEVEL" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_SUBJECT_GRADE" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT1" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_TEST_SUBJECT1" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_THEME_SUBJECT1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

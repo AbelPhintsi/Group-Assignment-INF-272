@@ -73,6 +73,7 @@
     <Property Name="HistoryFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="GeneralFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" FromRole="SUBJECTFACT" ToRole="Subject" />
+    <NavigationProperty Name="SUBJECT" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT1" FromRole="SUBJECTFACT" ToRole="SUBJECT1" />
   </EntityType>
   <EntityType Name="TEST">
     <Key>
@@ -84,6 +85,7 @@
     <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="TestStudents" Relationship="Self.FK_TestStudent_TEST" FromRole="TEST" ToRole="TestStudent" />
     <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT" FromRole="TEST" ToRole="Subject" />
+    <NavigationProperty Name="SUBJECT" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT1" FromRole="TEST" ToRole="SUBJECT1" />
   </EntityType>
   <EntityType Name="TestStudent">
     <Key>
@@ -104,6 +106,7 @@
     <Property Name="SubjectID" Type="Int32" Nullable="false" />
     <Property Name="ThemeMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT" FromRole="THEME" ToRole="Subject" />
+    <NavigationProperty Name="SUBJECT" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT1" FromRole="THEME" ToRole="SUBJECT1" />
   </EntityType>
   <EntityType Name="USER">
     <Key>
@@ -298,6 +301,34 @@
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="THEME" EntitySet="THEMEs" />
     </AssociationSet>
+    <EntitySet Name="DEPARTMENTs" EntityType="DatabaseRandomModel.DEPARTMENT" />
+    <EntitySet Name="GRADE1" EntityType="DatabaseRandomModel.GRADE1" />
+    <EntitySet Name="LEVELs" EntityType="DatabaseRandomModel.LEVEL" />
+    <EntitySet Name="SUBJECT1" EntityType="DatabaseRandomModel.SUBJECT1" />
+    <AssociationSet Name="FK_DEPARTMENT_SUBJECT" Association="DatabaseRandomModel.FK_DEPARTMENT_SUBJECT">
+      <End Role="SUBJECT1" EntitySet="SUBJECT1" />
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GRADE_LEVEL" Association="DatabaseRandomModel.FK_GRADE_LEVEL">
+      <End Role="LEVEL" EntitySet="LEVELs" />
+      <End Role="GRADE1" EntitySet="GRADE1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SUBJECT_GRADE" Association="DatabaseRandomModel.FK_SUBJECT_GRADE">
+      <End Role="GRADE1" EntitySet="GRADE1" />
+      <End Role="SUBJECT1" EntitySet="SUBJECT1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SUBJECTFACT_SUBJECT1" Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT1">
+      <End Role="SUBJECT1" EntitySet="SUBJECT1" />
+      <End Role="SUBJECTFACT" EntitySet="SUBJECTFACTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TEST_SUBJECT1" Association="DatabaseRandomModel.FK_TEST_SUBJECT1">
+      <End Role="SUBJECT1" EntitySet="SUBJECT1" />
+      <End Role="TEST" EntitySet="TESTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_THEME_SUBJECT1" Association="DatabaseRandomModel.FK_THEME_SUBJECT1">
+      <End Role="SUBJECT1" EntitySet="SUBJECT1" />
+      <End Role="THEME" EntitySet="THEMEs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Answer">
     <Key>
@@ -448,6 +479,120 @@
     <End Type="DatabaseRandomModel.THEME" Role="THEME" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Subject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="THEME">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DEPARTMENT">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" />
+    <Property Name="SubjectID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SUBJECT" Relationship="DatabaseRandomModel.FK_DEPARTMENT_SUBJECT" FromRole="DEPARTMENT" ToRole="SUBJECT1" />
+  </EntityType>
+  <EntityType Name="GRADE1">
+    <Key>
+      <PropertyRef Name="GradeID" />
+    </Key>
+    <Property Name="GradeID" Type="Int32" Nullable="false" />
+    <Property Name="LevelID" Type="Int32" Nullable="false" />
+    <Property Name="GradeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="LEVEL" Relationship="DatabaseRandomModel.FK_GRADE_LEVEL" FromRole="GRADE1" ToRole="LEVEL" />
+    <NavigationProperty Name="SUBJECTs" Relationship="DatabaseRandomModel.FK_SUBJECT_GRADE" FromRole="GRADE1" ToRole="SUBJECT1" />
+  </EntityType>
+  <EntityType Name="LEVEL">
+    <Key>
+      <PropertyRef Name="LevelID" />
+    </Key>
+    <Property Name="LevelID" Type="Int32" Nullable="false" />
+    <Property Name="LevelName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LevelMode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="GRADEs" Relationship="DatabaseRandomModel.FK_GRADE_LEVEL" FromRole="LEVEL" ToRole="GRADE1" />
+  </EntityType>
+  <EntityType Name="SUBJECT1">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="Int32" Nullable="false" />
+    <Property Name="GradeID" Type="Int32" Nullable="false" />
+    <Property Name="SubjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SubjectDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DEPARTMENTs" Relationship="DatabaseRandomModel.FK_DEPARTMENT_SUBJECT" FromRole="SUBJECT1" ToRole="DEPARTMENT" />
+    <NavigationProperty Name="GRADE" Relationship="DatabaseRandomModel.FK_SUBJECT_GRADE" FromRole="SUBJECT1" ToRole="GRADE1" />
+    <NavigationProperty Name="SUBJECTFACTs" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT1" FromRole="SUBJECT1" ToRole="SUBJECTFACT" />
+    <NavigationProperty Name="TESTs" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT1" FromRole="SUBJECT1" ToRole="TEST" />
+    <NavigationProperty Name="THEMEs" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT1" FromRole="SUBJECT1" ToRole="THEME" />
+  </EntityType>
+  <Association Name="FK_DEPARTMENT_SUBJECT">
+    <End Type="DatabaseRandomModel.SUBJECT1" Role="SUBJECT1" Multiplicity="1" />
+    <End Type="DatabaseRandomModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT1">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="DEPARTMENT">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GRADE_LEVEL">
+    <End Type="DatabaseRandomModel.LEVEL" Role="LEVEL" Multiplicity="1" />
+    <End Type="DatabaseRandomModel.GRADE1" Role="GRADE1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LEVEL">
+        <PropertyRef Name="LevelID" />
+      </Principal>
+      <Dependent Role="GRADE1">
+        <PropertyRef Name="LevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SUBJECT_GRADE">
+    <End Type="DatabaseRandomModel.GRADE1" Role="GRADE1" Multiplicity="1" />
+    <End Type="DatabaseRandomModel.SUBJECT1" Role="SUBJECT1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GRADE1">
+        <PropertyRef Name="GradeID" />
+      </Principal>
+      <Dependent Role="SUBJECT1">
+        <PropertyRef Name="GradeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SUBJECTFACT_SUBJECT1">
+    <End Type="DatabaseRandomModel.SUBJECT1" Role="SUBJECT1" Multiplicity="1" />
+    <End Type="DatabaseRandomModel.SUBJECTFACT" Role="SUBJECTFACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT1">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="SUBJECTFACT">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TEST_SUBJECT1">
+    <End Type="DatabaseRandomModel.SUBJECT1" Role="SUBJECT1" Multiplicity="1" />
+    <End Type="DatabaseRandomModel.TEST" Role="TEST" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT1">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="TEST">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_THEME_SUBJECT1">
+    <End Type="DatabaseRandomModel.SUBJECT1" Role="SUBJECT1" Multiplicity="1" />
+    <End Type="DatabaseRandomModel.THEME" Role="THEME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SUBJECT1">
         <PropertyRef Name="SubjectID" />
       </Principal>
       <Dependent Role="THEME">
