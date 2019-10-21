@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a0dd45e73c474a0ebc9bd1e2a81dcedc" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="DatabaseRandomModel.ADMINISTRATOR" Width="1.5" PointX="7.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.CITY" Width="1.5" PointX="9.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.COUNTRY" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.INSTITUTION" Width="1.5" PointX="12" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.REGION" Width="1.5" PointX="7.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.STUDENT" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.SUBJECTFACT" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.TEST" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.TestStudent" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.THEME" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.USER" Width="1.5" PointX="9.75" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_USER_ADMINISTRATOR" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_CITY_REGION" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_INSTITUTION_CITY" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_REGION_COUNTRY" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_STUDENT_COUNTRY" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_TestStudent_STUDENT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_USER_STUDENT" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_TestStudent_TEST" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.Answer" Width="1.5" PointX="15" PointY="5.125" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.Choice" Width="1.5" PointX="15" PointY="2.5" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.Grade" Width="1.5" PointX="8.25" PointY="0.875" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.Question" Width="1.5" PointX="12.75" PointY="3.625" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.Quiz" Width="1.5" PointX="10.5" PointY="3.5" />
+        <EntityTypeShape EntityType="DatabaseRandomModel.Subject" Width="1.5" PointX="5.25" PointY="6.625" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_Answer_Question" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_Choice_Question" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_Quiz_GRADE" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_Question_Quiz" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_Quiz_SUBJECT" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_TEST_SUBJECT" />
+        <AssociationConnector Association="DatabaseRandomModel.FK_THEME_SUBJECT" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
