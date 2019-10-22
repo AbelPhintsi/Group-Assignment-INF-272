@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using RandomApp.viewModels;
 using RandomApp.Models;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
 
 namespace RandomApp.Controllers
 {
@@ -99,5 +101,28 @@ namespace RandomApp.Controllers
 
             return Json(new { result = finalResultQuiz }, JsonRequestBehavior.AllowGet);
         }
+        /*
+                public ActionResult exportReport()
+                {
+                    ReportDocument rd = new ReportDocument();
+                    rd.Load(Path.Combine(Server.MapPath("~/reports"), "student Report.rpt"));
+                    Response.Buffer = false;
+                    Response.ClearContent();
+                    Response.ClearHeaders();
+
+                    try
+                    {
+                        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                        stream.Seek(0, SeekOrigin.Begin);
+                        return File(stream, "application/pdf", "StudentReport.pdf");
+
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+
+                }
+         */
     }
 }

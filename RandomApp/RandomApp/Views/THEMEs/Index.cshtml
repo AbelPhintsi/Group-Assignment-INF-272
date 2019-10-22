@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RandomApp.Models.THEME>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ThemeMode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject.SubjectText)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThemeMode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject.SubjectText)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ThemeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ThemeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ThemeID })
+        </td>
+    </tr>
+}
+
+</table>
