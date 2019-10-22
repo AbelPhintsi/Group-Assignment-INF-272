@@ -74,17 +74,6 @@
     <Property Name="GeneralFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" FromRole="SUBJECTFACT" ToRole="Subject" />
   </EntityType>
-  <EntityType Name="TEST">
-    <Key>
-      <PropertyRef Name="TestID" />
-    </Key>
-    <Property Name="TestID" Type="Int32" Nullable="false" />
-    <Property Name="SubjectID" Type="Int32" Nullable="false" />
-    <Property Name="DateStarted" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="TestStudents" Relationship="Self.FK_TestStudent_TEST" FromRole="TEST" ToRole="TestStudent" />
-    <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT" FromRole="TEST" ToRole="Subject" />
-  </EntityType>
   <EntityType Name="TestStudent">
     <Key>
       <PropertyRef Name="ID" />
@@ -94,16 +83,6 @@
     <Property Name="StudentID" Type="Int32" Nullable="false" />
     <Property Name="Mark" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <NavigationProperty Name="STUDENT" Relationship="Self.FK_TestStudent_STUDENT" FromRole="TestStudent" ToRole="STUDENT" />
-    <NavigationProperty Name="TEST" Relationship="Self.FK_TestStudent_TEST" FromRole="TestStudent" ToRole="TEST" />
-  </EntityType>
-  <EntityType Name="THEME">
-    <Key>
-      <PropertyRef Name="ThemeID" />
-    </Key>
-    <Property Name="ThemeID" Type="Int32" Nullable="false" />
-    <Property Name="SubjectID" Type="Int32" Nullable="false" />
-    <Property Name="ThemeMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT" FromRole="THEME" ToRole="Subject" />
   </EntityType>
   <EntityType Name="USER">
     <Key>
@@ -204,18 +183,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TestStudent_TEST">
-    <End Role="TEST" Type="Self.TEST" Multiplicity="1" />
-    <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TEST">
-        <PropertyRef Name="TestID" />
-      </Principal>
-      <Dependent Role="TestStudent">
-        <PropertyRef Name="TestID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="DatabaseRandomEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ADMINISTRATORs" EntityType="Self.ADMINISTRATOR" />
     <EntitySet Name="CITies" EntityType="Self.CITY" />
@@ -224,9 +191,7 @@
     <EntitySet Name="REGIONs" EntityType="Self.REGION" />
     <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
     <EntitySet Name="SUBJECTFACTs" EntityType="Self.SUBJECTFACT" />
-    <EntitySet Name="TESTs" EntityType="Self.TEST" />
     <EntitySet Name="TestStudents" EntityType="Self.TestStudent" />
-    <EntitySet Name="THEMEs" EntityType="Self.THEME" />
     <EntitySet Name="USERs" EntityType="Self.USER" />
     <AssociationSet Name="FK_USER_ADMINISTRATOR" Association="Self.FK_USER_ADMINISTRATOR">
       <End Role="ADMINISTRATOR" EntitySet="ADMINISTRATORs" />
@@ -255,10 +220,6 @@
     <AssociationSet Name="FK_USER_STUDENT" Association="Self.FK_USER_STUDENT">
       <End Role="STUDENT" EntitySet="STUDENTs" />
       <End Role="USER" EntitySet="USERs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TestStudent_TEST" Association="Self.FK_TestStudent_TEST">
-      <End Role="TEST" EntitySet="TESTs" />
-      <End Role="TestStudent" EntitySet="TestStudents" />
     </AssociationSet>
     <EntitySet Name="Answers" EntityType="DatabaseRandomModel.Answer" />
     <EntitySet Name="Choices" EntityType="DatabaseRandomModel.Choice" />
@@ -289,14 +250,6 @@
     <AssociationSet Name="FK_SUBJECTFACT_SUBJECT" Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT">
       <End Role="Subject" EntitySet="Subjects" />
       <End Role="SUBJECTFACT" EntitySet="SUBJECTFACTs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TEST_SUBJECT" Association="DatabaseRandomModel.FK_TEST_SUBJECT">
-      <End Role="Subject" EntitySet="Subjects" />
-      <End Role="TEST" EntitySet="TESTs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_THEME_SUBJECT" Association="DatabaseRandomModel.FK_THEME_SUBJECT">
-      <End Role="Subject" EntitySet="Subjects" />
-      <End Role="THEME" EntitySet="THEMEs" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Answer">
@@ -356,8 +309,6 @@
     <Property Name="SubjectText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="Quizs" Relationship="DatabaseRandomModel.FK_Quiz_SUBJECT" FromRole="Subject" ToRole="Quiz" />
     <NavigationProperty Name="SUBJECTFACTs" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" FromRole="Subject" ToRole="SUBJECTFACT" />
-    <NavigationProperty Name="TESTs" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT" FromRole="Subject" ToRole="TEST" />
-    <NavigationProperty Name="THEMEs" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT" FromRole="Subject" ToRole="THEME" />
   </EntityType>
   <Association Name="FK_Answer_Question">
     <End Type="DatabaseRandomModel.Question" Role="Question" Multiplicity="0..1" />
@@ -427,30 +378,6 @@
         <PropertyRef Name="SubjectID" />
       </Principal>
       <Dependent Role="SUBJECTFACT">
-        <PropertyRef Name="SubjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TEST_SUBJECT">
-    <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="1" />
-    <End Type="DatabaseRandomModel.TEST" Role="TEST" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="SubjectID" />
-      </Principal>
-      <Dependent Role="TEST">
-        <PropertyRef Name="SubjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_THEME_SUBJECT">
-    <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="1" />
-    <End Type="DatabaseRandomModel.THEME" Role="THEME" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="SubjectID" />
-      </Principal>
-      <Dependent Role="THEME">
         <PropertyRef Name="SubjectID" />
       </Dependent>
     </ReferentialConstraint>

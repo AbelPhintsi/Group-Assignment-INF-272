@@ -239,13 +239,7 @@
     <Compile Include="Models\SUBJECTFACT.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TEST.cs">
-      <DependentUpon>Random.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TestStudent.cs">
-      <DependentUpon>Random.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\THEME.cs">
       <DependentUpon>Random.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USER.cs">

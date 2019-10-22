@@ -19,8 +19,6 @@ namespace RandomApp.Models
         {
             this.Quizs = new HashSet<Quiz>();
             this.SUBJECTFACTs = new HashSet<SUBJECTFACT>();
-            this.TESTs = new HashSet<TEST>();
-            this.THEMEs = new HashSet<THEME>();
         }
     
         public int SubjectID { get; set; }
@@ -30,9 +28,5 @@ namespace RandomApp.Models
         public virtual ICollection<Quiz> Quizs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SUBJECTFACT> SUBJECTFACTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TEST> TESTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THEME> THEMEs { get; set; }
     }
 }

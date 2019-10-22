@@ -109,15 +109,6 @@
     <Property Name="HistoryFact" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="GeneralFact" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
-  <EntityType Name="TEST">
-    <Key>
-      <PropertyRef Name="TestID" />
-    </Key>
-    <Property Name="TestID" Type="int" Nullable="false" />
-    <Property Name="SubjectID" Type="int" Nullable="false" />
-    <Property Name="DateStarted" Type="datetime" Nullable="false" />
-    <Property Name="DateCompleted" Type="datetime" Nullable="false" />
-  </EntityType>
   <EntityType Name="TestStudent">
     <Key>
       <PropertyRef Name="ID" />
@@ -126,14 +117,6 @@
     <Property Name="TestID" Type="int" Nullable="false" />
     <Property Name="StudentID" Type="int" Nullable="false" />
     <Property Name="Mark" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-  </EntityType>
-  <EntityType Name="THEME">
-    <Key>
-      <PropertyRef Name="ThemeID" />
-    </Key>
-    <Property Name="ThemeID" Type="int" Nullable="false" />
-    <Property Name="SubjectID" Type="int" Nullable="false" />
-    <Property Name="ThemeMode" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="USER">
     <Key>
@@ -268,18 +251,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TEST_SUBJECT">
-    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-    <End Role="TEST" Type="Self.TEST" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="SubjectID" />
-      </Principal>
-      <Dependent Role="TEST">
-        <PropertyRef Name="SubjectID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TestStudent_STUDENT">
     <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
     <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
@@ -289,30 +260,6 @@
       </Principal>
       <Dependent Role="TestStudent">
         <PropertyRef Name="StudentID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TestStudent_TEST">
-    <End Role="TEST" Type="Self.TEST" Multiplicity="1" />
-    <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TEST">
-        <PropertyRef Name="TestID" />
-      </Principal>
-      <Dependent Role="TestStudent">
-        <PropertyRef Name="TestID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_THEME_SUBJECT">
-    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-    <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Subject">
-        <PropertyRef Name="SubjectID" />
-      </Principal>
-      <Dependent Role="THEME">
-        <PropertyRef Name="SubjectID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -354,9 +301,7 @@
     <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SUBJECTFACT" EntityType="Self.SUBJECTFACT" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TEST" EntityType="Self.TEST" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestStudent" EntityType="Self.TestStudent" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="THEME" EntityType="Self.THEME" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
       <End Role="Question" EntitySet="Question" />
@@ -398,21 +343,9 @@
       <End Role="Subject" EntitySet="Subject" />
       <End Role="SUBJECTFACT" EntitySet="SUBJECTFACT" />
     </AssociationSet>
-    <AssociationSet Name="FK_TEST_SUBJECT" Association="Self.FK_TEST_SUBJECT">
-      <End Role="Subject" EntitySet="Subject" />
-      <End Role="TEST" EntitySet="TEST" />
-    </AssociationSet>
     <AssociationSet Name="FK_TestStudent_STUDENT" Association="Self.FK_TestStudent_STUDENT">
       <End Role="STUDENT" EntitySet="STUDENT" />
       <End Role="TestStudent" EntitySet="TestStudent" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TestStudent_TEST" Association="Self.FK_TestStudent_TEST">
-      <End Role="TEST" EntitySet="TEST" />
-      <End Role="TestStudent" EntitySet="TestStudent" />
-    </AssociationSet>
-    <AssociationSet Name="FK_THEME_SUBJECT" Association="Self.FK_THEME_SUBJECT">
-      <End Role="Subject" EntitySet="Subject" />
-      <End Role="THEME" EntitySet="THEME" />
     </AssociationSet>
     <AssociationSet Name="FK_USER_ADMINISTRATOR" Association="Self.FK_USER_ADMINISTRATOR">
       <End Role="ADMINISTRATOR" EntitySet="ADMINISTRATOR" />

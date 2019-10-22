@@ -70,16 +70,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TESTs">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.TEST">
-        <MappingFragment StoreEntitySet="TEST">
-          <ScalarProperty Name="TestID" ColumnName="TestID" />
-          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-          <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
-          <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TestStudents">
       <EntityTypeMapping TypeName="DatabaseRandomModel.TestStudent">
         <MappingFragment StoreEntitySet="TestStudent">
@@ -87,15 +77,6 @@
           <ScalarProperty Name="TestID" ColumnName="TestID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="Mark" ColumnName="Mark" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="THEMEs">
-      <EntityTypeMapping TypeName="DatabaseRandomModel.THEME">
-        <MappingFragment StoreEntitySet="THEME">
-          <ScalarProperty Name="ThemeID" ColumnName="ThemeID" />
-          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-          <ScalarProperty Name="ThemeMode" ColumnName="ThemeMode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

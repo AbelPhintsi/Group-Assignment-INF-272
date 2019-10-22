@@ -20,6 +20,5 @@ namespace RandomApp.Models
         public decimal Mark { get; set; }
     
         public virtual STUDENT STUDENT { get; set; }
-        public virtual TEST TEST { get; set; }
     }
 }

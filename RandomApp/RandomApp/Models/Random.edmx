@@ -114,15 +114,6 @@
           <Property Name="HistoryFact" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="GeneralFact" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="TEST">
-          <Key>
-            <PropertyRef Name="TestID" />
-          </Key>
-          <Property Name="TestID" Type="int" Nullable="false" />
-          <Property Name="SubjectID" Type="int" Nullable="false" />
-          <Property Name="DateStarted" Type="datetime" Nullable="false" />
-          <Property Name="DateCompleted" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="TestStudent">
           <Key>
             <PropertyRef Name="ID" />
@@ -131,14 +122,6 @@
           <Property Name="TestID" Type="int" Nullable="false" />
           <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="Mark" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="THEME">
-          <Key>
-            <PropertyRef Name="ThemeID" />
-          </Key>
-          <Property Name="ThemeID" Type="int" Nullable="false" />
-          <Property Name="SubjectID" Type="int" Nullable="false" />
-          <Property Name="ThemeMode" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -273,18 +256,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TEST_SUBJECT">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-          <End Role="TEST" Type="Self.TEST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="TEST">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestStudent_STUDENT">
           <End Role="STUDENT" Type="Self.STUDENT" Multiplicity="1" />
           <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
@@ -294,30 +265,6 @@
             </Principal>
             <Dependent Role="TestStudent">
               <PropertyRef Name="StudentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestStudent_TEST">
-          <End Role="TEST" Type="Self.TEST" Multiplicity="1" />
-          <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST">
-              <PropertyRef Name="TestID" />
-            </Principal>
-            <Dependent Role="TestStudent">
-              <PropertyRef Name="TestID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_THEME_SUBJECT">
-          <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
-          <End Role="THEME" Type="Self.THEME" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="THEME">
-              <PropertyRef Name="SubjectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -359,9 +306,7 @@
           <EntitySet Name="STUDENT" EntityType="Self.STUDENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUBJECTFACT" EntityType="Self.SUBJECTFACT" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TEST" EntityType="Self.TEST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestStudent" EntityType="Self.TestStudent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="THEME" EntityType="Self.THEME" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Answer_Question" Association="Self.FK_Answer_Question">
             <End Role="Question" EntitySet="Question" />
@@ -403,21 +348,9 @@
             <End Role="Subject" EntitySet="Subject" />
             <End Role="SUBJECTFACT" EntitySet="SUBJECTFACT" />
           </AssociationSet>
-          <AssociationSet Name="FK_TEST_SUBJECT" Association="Self.FK_TEST_SUBJECT">
-            <End Role="Subject" EntitySet="Subject" />
-            <End Role="TEST" EntitySet="TEST" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestStudent_STUDENT" Association="Self.FK_TestStudent_STUDENT">
             <End Role="STUDENT" EntitySet="STUDENT" />
             <End Role="TestStudent" EntitySet="TestStudent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestStudent_TEST" Association="Self.FK_TestStudent_TEST">
-            <End Role="TEST" EntitySet="TEST" />
-            <End Role="TestStudent" EntitySet="TestStudent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_THEME_SUBJECT" Association="Self.FK_THEME_SUBJECT">
-            <End Role="Subject" EntitySet="Subject" />
-            <End Role="THEME" EntitySet="THEME" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_ADMINISTRATOR" Association="Self.FK_USER_ADMINISTRATOR">
             <End Role="ADMINISTRATOR" EntitySet="ADMINISTRATOR" />
@@ -506,17 +439,6 @@
           <Property Name="GeneralFact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" FromRole="SUBJECTFACT" ToRole="Subject" />
         </EntityType>
-        <EntityType Name="TEST">
-          <Key>
-            <PropertyRef Name="TestID" />
-          </Key>
-          <Property Name="TestID" Type="Int32" Nullable="false" />
-          <Property Name="SubjectID" Type="Int32" Nullable="false" />
-          <Property Name="DateStarted" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DateCompleted" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="TestStudents" Relationship="Self.FK_TestStudent_TEST" FromRole="TEST" ToRole="TestStudent" />
-          <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT" FromRole="TEST" ToRole="Subject" />
-        </EntityType>
         <EntityType Name="TestStudent">
           <Key>
             <PropertyRef Name="ID" />
@@ -526,16 +448,6 @@
           <Property Name="StudentID" Type="Int32" Nullable="false" />
           <Property Name="Mark" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="STUDENT" Relationship="Self.FK_TestStudent_STUDENT" FromRole="TestStudent" ToRole="STUDENT" />
-          <NavigationProperty Name="TEST" Relationship="Self.FK_TestStudent_TEST" FromRole="TestStudent" ToRole="TEST" />
-        </EntityType>
-        <EntityType Name="THEME">
-          <Key>
-            <PropertyRef Name="ThemeID" />
-          </Key>
-          <Property Name="ThemeID" Type="Int32" Nullable="false" />
-          <Property Name="SubjectID" Type="Int32" Nullable="false" />
-          <Property Name="ThemeMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Subject" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT" FromRole="THEME" ToRole="Subject" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -636,18 +548,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TestStudent_TEST">
-          <End Role="TEST" Type="Self.TEST" Multiplicity="1" />
-          <End Role="TestStudent" Type="Self.TestStudent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TEST">
-              <PropertyRef Name="TestID" />
-            </Principal>
-            <Dependent Role="TestStudent">
-              <PropertyRef Name="TestID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DatabaseRandomEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ADMINISTRATORs" EntityType="Self.ADMINISTRATOR" />
           <EntitySet Name="CITies" EntityType="Self.CITY" />
@@ -656,9 +556,7 @@
           <EntitySet Name="REGIONs" EntityType="Self.REGION" />
           <EntitySet Name="STUDENTs" EntityType="Self.STUDENT" />
           <EntitySet Name="SUBJECTFACTs" EntityType="Self.SUBJECTFACT" />
-          <EntitySet Name="TESTs" EntityType="Self.TEST" />
           <EntitySet Name="TestStudents" EntityType="Self.TestStudent" />
-          <EntitySet Name="THEMEs" EntityType="Self.THEME" />
           <EntitySet Name="USERs" EntityType="Self.USER" />
           <AssociationSet Name="FK_USER_ADMINISTRATOR" Association="Self.FK_USER_ADMINISTRATOR">
             <End Role="ADMINISTRATOR" EntitySet="ADMINISTRATORs" />
@@ -687,10 +585,6 @@
           <AssociationSet Name="FK_USER_STUDENT" Association="Self.FK_USER_STUDENT">
             <End Role="STUDENT" EntitySet="STUDENTs" />
             <End Role="USER" EntitySet="USERs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TestStudent_TEST" Association="Self.FK_TestStudent_TEST">
-            <End Role="TEST" EntitySet="TESTs" />
-            <End Role="TestStudent" EntitySet="TestStudents" />
           </AssociationSet>
           <EntitySet Name="Answers" EntityType="DatabaseRandomModel.Answer" />
           <EntitySet Name="Choices" EntityType="DatabaseRandomModel.Choice" />
@@ -721,14 +615,6 @@
           <AssociationSet Name="FK_SUBJECTFACT_SUBJECT" Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT">
             <End Role="Subject" EntitySet="Subjects" />
             <End Role="SUBJECTFACT" EntitySet="SUBJECTFACTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TEST_SUBJECT" Association="DatabaseRandomModel.FK_TEST_SUBJECT">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="TEST" EntitySet="TESTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_THEME_SUBJECT" Association="DatabaseRandomModel.FK_THEME_SUBJECT">
-            <End Role="Subject" EntitySet="Subjects" />
-            <End Role="THEME" EntitySet="THEMEs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Answer">
@@ -788,8 +674,6 @@
           <Property Name="SubjectText" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Quizs" Relationship="DatabaseRandomModel.FK_Quiz_SUBJECT" FromRole="Subject" ToRole="Quiz" />
           <NavigationProperty Name="SUBJECTFACTs" Relationship="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" FromRole="Subject" ToRole="SUBJECTFACT" />
-          <NavigationProperty Name="TESTs" Relationship="DatabaseRandomModel.FK_TEST_SUBJECT" FromRole="Subject" ToRole="TEST" />
-          <NavigationProperty Name="THEMEs" Relationship="DatabaseRandomModel.FK_THEME_SUBJECT" FromRole="Subject" ToRole="THEME" />
         </EntityType>
         <Association Name="FK_Answer_Question">
           <End Type="DatabaseRandomModel.Question" Role="Question" Multiplicity="0..1" />
@@ -859,30 +743,6 @@
               <PropertyRef Name="SubjectID" />
             </Principal>
             <Dependent Role="SUBJECTFACT">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TEST_SUBJECT">
-          <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="DatabaseRandomModel.TEST" Role="TEST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="TEST">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_THEME_SUBJECT">
-          <End Type="DatabaseRandomModel.Subject" Role="Subject" Multiplicity="1" />
-          <End Type="DatabaseRandomModel.THEME" Role="THEME" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="SubjectID" />
-            </Principal>
-            <Dependent Role="THEME">
               <PropertyRef Name="SubjectID" />
             </Dependent>
           </ReferentialConstraint>
@@ -962,16 +822,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TESTs">
-            <EntityTypeMapping TypeName="DatabaseRandomModel.TEST">
-              <MappingFragment StoreEntitySet="TEST">
-                <ScalarProperty Name="TestID" ColumnName="TestID" />
-                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-                <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
-                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TestStudents">
             <EntityTypeMapping TypeName="DatabaseRandomModel.TestStudent">
               <MappingFragment StoreEntitySet="TestStudent">
@@ -979,15 +829,6 @@
                 <ScalarProperty Name="TestID" ColumnName="TestID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="Mark" ColumnName="Mark" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="THEMEs">
-            <EntityTypeMapping TypeName="DatabaseRandomModel.THEME">
-              <MappingFragment StoreEntitySet="THEME">
-                <ScalarProperty Name="ThemeID" ColumnName="ThemeID" />
-                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
-                <ScalarProperty Name="ThemeMode" ColumnName="ThemeMode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
