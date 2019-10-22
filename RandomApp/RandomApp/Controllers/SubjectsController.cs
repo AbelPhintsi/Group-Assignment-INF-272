@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RandomApp.Models;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
 
 namespace RandomApp.Controllers
 {
@@ -123,5 +125,29 @@ namespace RandomApp.Controllers
             }
             base.Dispose(disposing);
         }
+/*
+        public ActionResult exportReport()
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/reports"), "adminReport.rpt"));
+            rd.SetDataSource(db.Subjects.ToList());
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            try
+            {
+                Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                stream.Seek(0,SeekOrigin.Begin);
+                return File(stream,"application/pdf","StudentReport.pdf");
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+*/
+
     }
 }
