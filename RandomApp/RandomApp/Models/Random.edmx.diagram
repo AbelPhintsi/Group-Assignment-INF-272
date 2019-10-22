@@ -12,9 +12,7 @@
         <EntityTypeShape EntityType="DatabaseRandomModel.REGION" Width="1.5" PointX="7.5" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseRandomModel.STUDENT" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseRandomModel.SUBJECTFACT" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseRandomModel.TEST" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseRandomModel.TestStudent" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DatabaseRandomModel.THEME" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DatabaseRandomModel.USER" Width="1.5" PointX="9.75" PointY="12.375" IsExpanded="true" />
         <AssociationConnector Association="DatabaseRandomModel.FK_USER_ADMINISTRATOR" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseRandomModel.FK_CITY_REGION" ManuallyRouted="false" />
@@ -23,7 +21,6 @@
         <AssociationConnector Association="DatabaseRandomModel.FK_STUDENT_COUNTRY" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseRandomModel.FK_TestStudent_STUDENT" ManuallyRouted="false" />
         <AssociationConnector Association="DatabaseRandomModel.FK_USER_STUDENT" ManuallyRouted="false" />
-        <AssociationConnector Association="DatabaseRandomModel.FK_TestStudent_TEST" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DatabaseRandomModel.Answer" Width="1.5" PointX="15" PointY="5.125" />
         <EntityTypeShape EntityType="DatabaseRandomModel.Choice" Width="1.5" PointX="15" PointY="2.5" />
         <EntityTypeShape EntityType="DatabaseRandomModel.Grade" Width="1.5" PointX="8.25" PointY="0.875" />
@@ -36,8 +33,6 @@
         <AssociationConnector Association="DatabaseRandomModel.FK_Question_Quiz" />
         <AssociationConnector Association="DatabaseRandomModel.FK_Quiz_SUBJECT" />
         <AssociationConnector Association="DatabaseRandomModel.FK_SUBJECTFACT_SUBJECT" />
-        <AssociationConnector Association="DatabaseRandomModel.FK_TEST_SUBJECT" />
-        <AssociationConnector Association="DatabaseRandomModel.FK_THEME_SUBJECT" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

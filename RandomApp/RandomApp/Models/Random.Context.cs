@@ -32,9 +32,7 @@ namespace RandomApp.Models
         public virtual DbSet<REGION> REGIONs { get; set; }
         public virtual DbSet<STUDENT> STUDENTs { get; set; }
         public virtual DbSet<SUBJECTFACT> SUBJECTFACTs { get; set; }
-        public virtual DbSet<TEST> TESTs { get; set; }
         public virtual DbSet<TestStudent> TestStudents { get; set; }
-        public virtual DbSet<THEME> THEMEs { get; set; }
         public virtual DbSet<USER> USERs { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<Choice> Choices { get; set; }
